@@ -1,0 +1,24 @@
+group 'com.littlejohnny'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        spring_boot_plugin_version = '2.0.0.RELEASE'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_plugin_version")
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+}

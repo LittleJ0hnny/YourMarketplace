@@ -1,4 +1,18 @@
 group 'com.littlejohnny'
 version '1.0-SNAPSHOT'
 
+subprojects {
+    apply plugin: 'idea'
+    apply plugin: 'java'
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.3'
+}
 
