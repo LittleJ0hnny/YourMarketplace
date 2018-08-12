@@ -1,0 +1,68 @@
+group 'com.littlejohnny'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        spring_boot_plugin_version = '2.0.0.RELEASE'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_plugin_version")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    liquibase
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'mysql:mysql-connector-java:5.1.13'
+
+    liquibase 'org.liquibase:liquibase-core:3.6.2'
+    liquibase 'mysql:mysql-connector-java:5.1.13'
+}
+
+task generateFromDb(type: JavaExec) {
+    group = "Liquibase"
+    classpath configurations.liquibase
+    main = "liquibase.integration.commandline.Main"
+    args "--changeLogFile=src/main/resources/db/changelog/db.changelog-master.xml"
+    args "--username=root"
+    args "--password=root"
+    args "--url=jdbc:mysql://localhost:3306/mpdb"
+    args "--logLevel=debug"
+    args "--driver=com.mysql.jdbc.Driver"
+    args "--diffTypes=\"tables\", \"columns\", \"views\", \"primaryKeys\", \"indexes\", \"foreignKeys\", \"sequences\", \"data\""
+    args "generateChangeLog"
+}
+
+task updateDb(type: JavaExec) {
+    group = "Liquibase"
+    classpath configurations.liquibase
+    main = "liquibase.integration.commandline.Main"
+    args "--changeLogFile=src/main/resources/db/changelog/db.changelog-master.xml"
+    args "--username=root"
+    args "--password=root"
+    args "--url=jdbc:mysql://localhost:3306/mpdb"
+    args "--driver=com.mysql.jdbc.Driver"
+    args "--logLevel=debug"
+    args "--defaultSchemaName=mpdb"
+    args "update"
+}

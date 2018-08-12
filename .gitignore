@@ -24,6 +24,7 @@ hs_err_pid*
 
 #Intellij Idea
 .idea
+out
 
 #Gradle
 .gradle

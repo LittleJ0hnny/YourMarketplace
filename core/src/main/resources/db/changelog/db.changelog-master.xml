@@ -1,0 +1,276 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="pro10 (generated)" id="1534021793579-1">
+        <createTable tableName="attribute_type_product_type">
+            <column name="attribute_type_id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="product_type_id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-2">
+        <createTable tableName="attribute_types">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="type_name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-3">
+        <createTable tableName="attribute_value_attribute_type">
+            <column name="attribute_value_id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="attribute_type_id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-4">
+        <createTable tableName="attribute_values">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="attribute_value" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-5">
+        <createTable tableName="product_attributes">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="attribute_type_id" type="BIGINT"/>
+            <column name="attribute_value_id" type="BIGINT"/>
+            <column name="product_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-6">
+        <createTable tableName="product_type">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="product_type_name" type="VARCHAR(255)">
+                <constraints unique="true"/>
+            </column>
+            <column name="parent_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-7">
+        <createTable tableName="products">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="product_type_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-8">
+        <insert tableName="attribute_type_product_type">
+            <column name="attribute_type_id" valueNumeric="1"/>
+            <column name="product_type_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="attribute_type_product_type">
+            <column name="attribute_type_id" valueNumeric="1"/>
+            <column name="product_type_id" valueNumeric="4"/>
+        </insert>
+        <insert tableName="attribute_type_product_type">
+            <column name="attribute_type_id" valueNumeric="2"/>
+            <column name="product_type_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="attribute_type_product_type">
+            <column name="attribute_type_id" valueNumeric="2"/>
+            <column name="product_type_id" valueNumeric="4"/>
+        </insert>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-9">
+        <insert tableName="attribute_types">
+            <column name="id" valueNumeric="1"/>
+            <column name="type_name" value="Colour"/>
+        </insert>
+        <insert tableName="attribute_types">
+            <column name="id" valueNumeric="2"/>
+            <column name="type_name" value="Size"/>
+        </insert>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-10">
+        <insert tableName="attribute_value_attribute_type">
+            <column name="attribute_value_id" valueNumeric="1"/>
+            <column name="attribute_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="attribute_value_attribute_type">
+            <column name="attribute_value_id" valueNumeric="2"/>
+            <column name="attribute_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="attribute_value_attribute_type">
+            <column name="attribute_value_id" valueNumeric="3"/>
+            <column name="attribute_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="attribute_value_attribute_type">
+            <column name="attribute_value_id" valueNumeric="4"/>
+            <column name="attribute_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="attribute_value_attribute_type">
+            <column name="attribute_value_id" valueNumeric="5"/>
+            <column name="attribute_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="attribute_value_attribute_type">
+            <column name="attribute_value_id" valueNumeric="6"/>
+            <column name="attribute_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="attribute_value_attribute_type">
+            <column name="attribute_value_id" valueNumeric="7"/>
+            <column name="attribute_type_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="attribute_value_attribute_type">
+            <column name="attribute_value_id" valueNumeric="8"/>
+            <column name="attribute_type_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="attribute_value_attribute_type">
+            <column name="attribute_value_id" valueNumeric="9"/>
+            <column name="attribute_type_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="attribute_value_attribute_type">
+            <column name="attribute_value_id" valueNumeric="10"/>
+            <column name="attribute_type_id" valueNumeric="1"/>
+        </insert>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-11">
+        <insert tableName="attribute_values">
+            <column name="id" valueNumeric="1"/>
+            <column name="attribute_value" value="S"/>
+        </insert>
+        <insert tableName="attribute_values">
+            <column name="id" valueNumeric="2"/>
+            <column name="attribute_value" value="XS"/>
+        </insert>
+        <insert tableName="attribute_values">
+            <column name="id" valueNumeric="3"/>
+            <column name="attribute_value" value="M"/>
+        </insert>
+        <insert tableName="attribute_values">
+            <column name="id" valueNumeric="4"/>
+            <column name="attribute_value" value="L"/>
+        </insert>
+        <insert tableName="attribute_values">
+            <column name="id" valueNumeric="5"/>
+            <column name="attribute_value" value="XL"/>
+        </insert>
+        <insert tableName="attribute_values">
+            <column name="id" valueNumeric="6"/>
+            <column name="attribute_value" value="XXL"/>
+        </insert>
+        <insert tableName="attribute_values">
+            <column name="id" valueNumeric="7"/>
+            <column name="attribute_value" value="Red"/>
+        </insert>
+        <insert tableName="attribute_values">
+            <column name="id" valueNumeric="8"/>
+            <column name="attribute_value" value="Green"/>
+        </insert>
+        <insert tableName="attribute_values">
+            <column name="id" valueNumeric="9"/>
+            <column name="attribute_value" value="Blue"/>
+        </insert>
+        <insert tableName="attribute_values">
+            <column name="id" valueNumeric="10"/>
+            <column name="attribute_value" value="Yellow"/>
+        </insert>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-12">
+        <insert tableName="product_attributes">
+            <column name="id" valueNumeric="1"/>
+            <column name="attribute_type_id" valueNumeric="1"/>
+            <column name="attribute_value_id" valueNumeric="9"/>
+            <column name="product_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="product_attributes">
+            <column name="id" valueNumeric="2"/>
+            <column name="attribute_type_id" valueNumeric="2"/>
+            <column name="attribute_value_id" valueNumeric="4"/>
+            <column name="product_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="product_attributes">
+            <column name="id" valueNumeric="3"/>
+            <column name="attribute_type_id" valueNumeric="1"/>
+            <column name="attribute_value_id" valueNumeric="7"/>
+            <column name="product_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="product_attributes">
+            <column name="id" valueNumeric="4"/>
+            <column name="attribute_type_id" valueNumeric="2"/>
+            <column name="attribute_value_id" valueNumeric="5"/>
+            <column name="product_id" valueNumeric="2"/>
+        </insert>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-13">
+        <insert tableName="product_type">
+            <column name="id" valueNumeric="2"/>
+            <column name="product_type_name" value="Man's dress"/>
+            <column name="parent_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="product_type">
+            <column name="id" valueNumeric="3"/>
+            <column name="product_type_name" value="T-shirt"/>
+            <column name="parent_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="product_type">
+            <column name="id" valueNumeric="4"/>
+            <column name="product_type_name" value="Hat"/>
+            <column name="parent_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="product_type">
+            <column name="id" valueNumeric="1"/>
+            <column name="product_type_name" value="Dress"/>
+            <column name="parent_id"/>
+        </insert>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-14">
+        <insert tableName="products">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="FredPerry"/>
+            <column name="product_type_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="products">
+            <column name="id" valueNumeric="2"/>
+            <column name="name" value="Adidas"/>
+            <column name="product_type_id" valueNumeric="4"/>
+        </insert>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-15">
+        <createIndex indexName="FK923dhs733rpoelp2tls2ful1" tableName="products">
+            <column name="product_type_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-16">
+        <createIndex indexName="FKcex46yvx4g18b2pn09p79h1mc" tableName="product_attributes">
+            <column name="product_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-17">
+        <createIndex indexName="FKcqcluqtubhvi59r8fiwotah6n" tableName="attribute_type_product_type">
+            <column name="product_type_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-18">
+        <createIndex indexName="FKjdu92f42xssexo648j43anl0" tableName="product_attributes">
+            <column name="attribute_value_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-19">
+        <createIndex indexName="FKkbyttfipfsi0uipm2su5e154d" tableName="product_type">
+            <column name="parent_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-20">
+        <createIndex indexName="FKq9srptgmjqhuewhi8rsns8s0c" tableName="attribute_value_attribute_type">
+            <column name="attribute_type_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="pro10 (generated)" id="1534021793579-21">
+        <createIndex indexName="FKt36l8oun7wfu3atbmdgvx5tbd" tableName="product_attributes">
+            <column name="attribute_type_id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
