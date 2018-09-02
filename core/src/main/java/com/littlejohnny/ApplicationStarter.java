@@ -12,6 +12,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ApplicationStarter {
     public static void main(String[] args) {
         SpringApplication.run(ApplicationStarter.class);
-        System.out.println("Application successfully started!");
+        System.out.println("CORE successfully started!");
     }
 }
