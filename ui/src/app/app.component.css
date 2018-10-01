@@ -1,0 +1,5 @@
+.header-common {
+  background-color: darkslateblue;
+  flex-direction: row;
+  flex-grow: 1;
+}
