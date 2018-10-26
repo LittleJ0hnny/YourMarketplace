@@ -1,0 +1,27 @@
+spring:
+  cloud:
+    config:
+      name: auth
+      discovery:
+        service-id: configserver
+        enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+# Our certificate settings for enabling JWT tokens
+jwt:
+  certificate:
+    store:
+      file: classpath:/certificate/keystore.jks
+      password: password
+    key:
+      alias: keystore
+      password: password
+
+security:
+  oauth2:
+    resource:
+      filter-order: 3
