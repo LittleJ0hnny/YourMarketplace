@@ -16,15 +16,14 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 public class GatewaySecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("/**")
-                .authorizeRequests()
-                .antMatchers("/")
-                .permitAll()
+        http.authorizeRequests()
                 .anyRequest()
                 .authenticated()
+                .antMatchers("/authserver/login")
+                .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/authserver/logout")
                 .permitAll()
                 .and()
                 .csrf()

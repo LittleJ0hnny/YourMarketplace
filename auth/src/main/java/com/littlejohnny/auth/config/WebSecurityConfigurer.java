@@ -20,7 +20,9 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf()
-                .and().formLogin().loginPage("/login");
+                .and().formLogin().loginPage("http://localhost:4200/auth/login")
+                .and()
+                .cors();
     }
 
     @Override

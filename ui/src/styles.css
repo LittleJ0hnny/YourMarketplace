@@ -12,4 +12,8 @@ body {
   display: flex;
 }
 
+.in-column {
+  flex-direction: column;
+}
+
 
