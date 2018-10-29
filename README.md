@@ -4,3 +4,5 @@
 3.Move same logic related with fileName validation in separated method.
 4.Add collection of image paths to product entity.
 5.Add logger.
+
+for dev dependencies npm install --save-dev @angular-devkit/build-angular

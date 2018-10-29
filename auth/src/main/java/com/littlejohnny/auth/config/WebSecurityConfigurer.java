@@ -21,6 +21,9 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and().csrf()
                 .and().formLogin().loginPage("http://localhost:4200/auth/login")
+                .loginProcessingUrl("/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
                 .and()
                 .cors();
     }
