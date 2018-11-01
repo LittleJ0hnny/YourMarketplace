@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -33,19 +34,19 @@ public class AuthServerConfigurer extends AuthorizationServerConfigurerAdapter {
     private String keyPassword;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private AuthenticationManager authenticationManager;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients
                 .inMemory()
                 .withClient("authserver")
-                .secret("passwordforauthserver")
+                .secret("{noop}passwordforauthserver")
                 .redirectUris("http://localhost:8080/")
-                .authorizedGrantTypes("authorization_code", "refresh_token")
+                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
                 .scopes("myscope")
                 .autoApprove(true)
-                .accessTokenValiditySeconds(30)
+                .accessTokenValiditySeconds(1000)
                 .refreshTokenValiditySeconds(1800);
     }
 
@@ -53,7 +54,7 @@ public class AuthServerConfigurer extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
                 .accessTokenConverter(jwtAccessTokenConverter())
-                .userDetailsService(userDetailsService);
+                .authenticationManager(authenticationManager);
     }
 
     @Bean

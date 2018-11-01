@@ -19,7 +19,7 @@ public class GatewaySecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .anyRequest()
                 .authenticated()
-                .antMatchers("/authserver/login")
+                .antMatchers("/authserver/**")
                 .permitAll()
                 .and()
                 .logout()
