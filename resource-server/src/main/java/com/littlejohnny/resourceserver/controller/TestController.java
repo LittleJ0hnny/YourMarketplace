@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
     @GetMapping("/message")
+    @PreAuthorize("hasRole('ADMIN')")
     public String getMessage() {
         return "Hello World !";
     }
