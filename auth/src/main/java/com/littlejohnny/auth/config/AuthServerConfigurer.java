@@ -43,7 +43,7 @@ public class AuthServerConfigurer extends AuthorizationServerConfigurerAdapter {
                 .withClient("authserver")
                 .secret("{noop}passwordforauthserver")
                 .redirectUris("http://localhost:8080/")
-                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
+                .authorizedGrantTypes("password", "refresh_token")
                 .scopes("myscope")
                 .autoApprove(true)
                 .accessTokenValiditySeconds(1000)

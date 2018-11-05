@@ -18,9 +18,8 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login").permitAll()
+                .antMatchers("/login", "/oauth/token").permitAll()
                 .anyRequest().authenticated()
-                .and().csrf()
                 .and().formLogin().loginPage("http://localhost:4200/auth/login")
                 .loginProcessingUrl("/login")
                 .usernameParameter("username")

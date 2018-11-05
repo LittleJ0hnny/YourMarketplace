@@ -6,4 +6,5 @@ include 'discovery'
 include 'gateway'
 include 'auth'
 include 'resource-server'
+include 'resource-server2'
 
