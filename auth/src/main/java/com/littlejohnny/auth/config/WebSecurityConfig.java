@@ -13,19 +13,14 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @Configuration
 @EnableWebSecurity
 @EnableOAuth2Client
-public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login", "/oauth/token").permitAll()
+                .antMatchers("/oauth/token").permitAll()
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("http://localhost:4200/auth/login")
-                .loginProcessingUrl("/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .and()
-                .cors();
+                .and().cors();
     }
 
     @Override

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
-    @GetMapping("/person")
+    @GetMapping("/user")
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public @ResponseBody Person personInfo() {
         return new Person("abir", "Dhaka", "Bangladesh", 29, "Male");

@@ -17,10 +17,10 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 
 import java.security.KeyPair;
 
+@Order(6)
 @Configuration
 @EnableAuthorizationServer
-@Order(6)
-public class AuthServerConfigurer extends AuthorizationServerConfigurerAdapter {
+public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     @Value("${jwt.certificate.store.file}")
     private Resource keystore;
 

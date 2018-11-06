@@ -11,7 +11,7 @@ import org.springframework.web.client.RestOperations;
 
 @RestController
 @RequestMapping("/gateway")
-public class TestController {
+public class GatewayController {
 
     @Autowired
     private RestOperations restOperations;

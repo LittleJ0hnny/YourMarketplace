@@ -1,4 +1,4 @@
-package resourceserver.config;
+package com.littlejohnny.gateway.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -17,11 +17,16 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @EnableWebSecurity
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfigurer extends ResourceServerConfigurerAdapter {
+public class GatewaySecurityConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.httpBasic().disable();
-        http.authorizeRequests().anyRequest().authenticated();
+        http
+                .authorizeRequests()
+                .antMatchers("/authserver/oauth/token")
+                .permitAll()
+                .anyRequest()
+                .authenticated();
     }
 
     @Bean
@@ -29,3 +34,4 @@ public class SecurityConfigurer extends ResourceServerConfigurerAdapter {
         return new OAuth2RestTemplate(resource, context);
     }
 }
+

@@ -11,10 +11,15 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @EnableWebSecurity
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfigurer extends ResourceServerConfigurerAdapter {
+public class SecurityConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.httpBasic().disable();
-        http.authorizeRequests().anyRequest().authenticated();
+        http.
+                authorizeRequests()
+                .antMatchers("/message2")
+                .permitAll()
+                .anyRequest()
+                .authenticated();
     }
 }
