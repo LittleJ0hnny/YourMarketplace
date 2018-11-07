@@ -1,4 +1,4 @@
-package com.littlejohnny.resourceserver.config;
+package com.littlejohnny.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -17,8 +17,6 @@ public class SecurityConfig extends ResourceServerConfigurerAdapter {
         http.httpBasic().disable();
         http.
                 authorizeRequests()
-                .antMatchers("/message")
-                .permitAll()
                 .anyRequest()
                 .authenticated();
     }

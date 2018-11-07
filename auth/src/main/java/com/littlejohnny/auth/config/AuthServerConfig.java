@@ -47,6 +47,15 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
                 .scopes("myscope")
                 .autoApprove(true)
                 .accessTokenValiditySeconds(1000)
+                .refreshTokenValiditySeconds(1800)
+                .and()
+                .withClient("authserver2")
+                .secret("{noop}passwordforauthserver2")
+                .redirectUris("http://localhost:8080/")
+                .authorizedGrantTypes("password", "refresh_token")
+                .scopes("myscope2")
+                .autoApprove(true)
+                .accessTokenValiditySeconds(1000)
                 .refreshTokenValiditySeconds(1800);
     }
 

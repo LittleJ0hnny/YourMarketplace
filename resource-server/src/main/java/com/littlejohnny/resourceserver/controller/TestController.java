@@ -8,7 +8,7 @@ import java.security.Principal;
 @RestController
 public class TestController {
 
-    @RequestMapping("/user")
+    @GetMapping("/user")
     public Principal user(Principal user) {
         return user;
     }
@@ -18,4 +18,6 @@ public class TestController {
     public String getMessage() {
         return "Hello World !";
     }
+
+
 }

@@ -19,7 +19,6 @@ import java.nio.file.Path;
 
 @Controller
 public class ImageController {
-
     @Autowired
     private StorageService storageService;
 
