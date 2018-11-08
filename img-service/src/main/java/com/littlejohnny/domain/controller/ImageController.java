@@ -28,6 +28,11 @@ public class ImageController {
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + path.getFileName() + "\"").body(Files.readAllBytes(path));
     }
 
+    @GetMapping("/images/message")
+    public String getMessage() {
+        return new String("Hello World !");
+    }
+
     @GetMapping("/images/{fileName}")
     public @ResponseBody ResponseEntity<byte[]> getImageByName(@PathVariable String fileName) throws IOException {
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_JPEG_VALUE).body(Files.readAllBytes(storageService.load(fileName)));

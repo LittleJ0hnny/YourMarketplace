@@ -23,15 +23,10 @@ public class GatewaySecurityConfig extends ResourceServerConfigurerAdapter {
         http.httpBasic().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/authserver/oauth/token")
+                .antMatchers("/authserver/oauth/token", "/gateway/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
-    }
-
-    @Bean
-    public OAuth2RestOperations restOperations(OAuth2ProtectedResourceDetails resource, @Qualifier("oauth2ClientContext") OAuth2ClientContext context) {
-        return new OAuth2RestTemplate(resource, context);
     }
 }
 
