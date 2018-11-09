@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient("image-service")
 public interface ImgServiceClient {
-
     @GetMapping("/images/{fileName}")
     ResponseEntity<byte[]> getImageByName(@PathVariable("fileName") String fileName);
 

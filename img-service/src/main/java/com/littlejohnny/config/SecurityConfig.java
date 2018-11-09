@@ -17,8 +17,6 @@ public class SecurityConfig extends ResourceServerConfigurerAdapter {
         http.httpBasic().disable();
         http.
                 authorizeRequests()
-                .antMatchers("/images/**")
-                .permitAll()
                 .anyRequest()
                 .authenticated();
     }

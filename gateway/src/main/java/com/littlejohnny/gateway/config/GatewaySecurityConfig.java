@@ -1,5 +1,6 @@
 package com.littlejohnny.gateway.config;
 
+import feign.RequestInterceptor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,10 +24,15 @@ public class GatewaySecurityConfig extends ResourceServerConfigurerAdapter {
         http.httpBasic().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/authserver/oauth/token", "/gateway/**")
+                .antMatchers("/authserver/oauth/token")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
+    }
+
+    @Bean
+    public RequestInterceptor getUserFeignClientInterceptor() {
+        return new FeignClientInterceptor();
     }
 }
 
