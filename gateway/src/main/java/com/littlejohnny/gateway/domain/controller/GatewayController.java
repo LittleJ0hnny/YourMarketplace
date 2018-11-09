@@ -17,13 +17,12 @@ public class GatewayController {
     private ImgServiceClient imgServiceClient;
 
     @GetMapping("/images/{fileName}")
-    public @ResponseBody ResponseEntity<byte[]> getImageByName() {
-        return imgServiceClient.getImageByName();
+    public @ResponseBody ResponseEntity<byte[]> getImageByName(@PathVariable("fileName") String fileName) {
+        return imgServiceClient.getImageByName(fileName);
     }
 
     @GetMapping("/images/msg")
-    public String getMessage() {
-        System.out.println(imgServiceClient.getMessage());
-        return imgServiceClient.getMessage();
+    public @ResponseBody ResponseEntity<String> getMessage() {
+        return ResponseEntity.ok(imgServiceClient.getMessage());
     }
 }

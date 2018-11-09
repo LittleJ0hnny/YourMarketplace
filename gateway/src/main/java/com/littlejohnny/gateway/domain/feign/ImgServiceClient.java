@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface ImgServiceClient {
 
     @GetMapping("/images/{fileName}")
-    ResponseEntity<byte[]> getImageByName();
+    ResponseEntity<byte[]> getImageByName(@PathVariable("fileName") String fileName);
 
     @GetMapping("/images/message")
     String getMessage();

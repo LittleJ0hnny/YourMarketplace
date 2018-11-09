@@ -29,8 +29,8 @@ public class ImageController {
     }
 
     @GetMapping("/images/message")
-    public String getMessage() {
-        return new String("Hello World !");
+    public @ResponseBody ResponseEntity<String> getMessage() {
+        return ResponseEntity.ok("Hello World !");
     }
 
     @GetMapping("/images/{fileName}")
