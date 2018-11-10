@@ -5,5 +5,4 @@ include 'config'
 include 'discovery'
 include 'gateway'
 include 'auth'
-include 'resource-server'
 
