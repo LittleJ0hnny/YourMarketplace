@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AttributeValueServiceImpl extends AbstractService<AttributeValue, Long, AttributeValueRepository> implements AttributeValueService {
-    private AttributeValueRepository attributeValueRepository;
 
     @Autowired
     protected AttributeValueServiceImpl(AttributeValueRepository repository) {
         super(repository);
-        this.attributeValueRepository = repository;
     }
 }

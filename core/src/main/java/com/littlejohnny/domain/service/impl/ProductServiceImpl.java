@@ -10,12 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductServiceImpl extends AbstractService<Product, Long, ProductRepository> implements ProductService{
 
-    private ProductRepository productRepository;
-
     @Autowired
     protected ProductServiceImpl(ProductRepository repository) {
         super(repository);
-        this.productRepository = repository;
     }
 
 

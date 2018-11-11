@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
@@ -36,27 +37,12 @@ public class AuthServiceConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private ClientDetailsService clientDetailsService;
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients
-                .inMemory()
-                .withClient("authserver")
-                .secret("{noop}passwordforauthserver")
-                .redirectUris("http://localhost:8080/")
-                .authorizedGrantTypes("password", "refresh_token")
-                .scopes("myscope")
-                .autoApprove(true)
-                .accessTokenValiditySeconds(1000)
-                .refreshTokenValiditySeconds(1800)
-                .and()
-                .withClient("authserver2")
-                .secret("{noop}passwordforauthserver2")
-                .redirectUris("http://localhost:8080/")
-                .authorizedGrantTypes("password", "refresh_token")
-                .scopes("myscope2")
-                .autoApprove(true)
-                .accessTokenValiditySeconds(1000)
-                .refreshTokenValiditySeconds(1800);
+        clients.withClientDetails(clientDetailsService).build();
     }
 
     @Override
