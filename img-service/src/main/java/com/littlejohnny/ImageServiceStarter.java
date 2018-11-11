@@ -4,15 +4,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @EnableFeignClients
 @EnableEurekaClient
 @SpringBootApplication
-public class ApplicationStarter {
+public class ImageServiceStarter {
     public static void main(String[] args) {
-        SpringApplication.run(ApplicationStarter.class);
+        SpringApplication.run(ImageServiceStarter.class);
         System.out.println("IMG_SERVICE successfully started!");
     }
 }

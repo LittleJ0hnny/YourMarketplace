@@ -3,7 +3,7 @@ spring:
     config:
       name: gateway
       discovery:
-        service-id: configserver
+        service-id: configservice
         enabled: true
       username: configUser
       password: configPassword

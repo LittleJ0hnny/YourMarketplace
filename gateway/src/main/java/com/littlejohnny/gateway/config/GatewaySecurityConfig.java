@@ -20,7 +20,7 @@ public class GatewaySecurityConfig extends ResourceServerConfigurerAdapter {
         http.httpBasic().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/authserver/oauth/token", "/actuator/**", "/discovery/**", "/eureka/**", "/configserver/**")
+                .antMatchers("/authservice/oauth/token", "/actuator/**", "/discovery/**", "/eureka/**", "/configserver/**", "/image-service/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
