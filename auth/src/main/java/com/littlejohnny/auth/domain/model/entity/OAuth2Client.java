@@ -4,10 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "oauth2_clients")
@@ -49,8 +46,28 @@ public class OAuth2Client implements ClientDetails {
     @Column
     private Integer refreshTokenValiditySeconds;
 
+    @Column
+    private boolean isAutoApprove;
+
+    public OAuth2Client() {
+        this.isSecretRequired = true;
+        this.accessTokenValiditySeconds = 1800;
+        this.refreshTokenValiditySeconds = 86400;
+    }
+
+    public OAuth2Client(String clientId, String clientSecret, Set<String> authorizedGrantTypes) {
+        this();
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
+        this.authorizedGrantTypes = authorizedGrantTypes;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
@@ -154,7 +171,11 @@ public class OAuth2Client implements ClientDetails {
 
     @Override
     public boolean isAutoApprove(String scope) {
-        return true;
+        return isAutoApprove;
+    }
+
+    public void setAutoApprove(boolean autoApprove) {
+        isAutoApprove = autoApprove;
     }
 
     @Override

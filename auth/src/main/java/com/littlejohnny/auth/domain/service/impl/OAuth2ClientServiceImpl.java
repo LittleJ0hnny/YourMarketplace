@@ -18,6 +18,6 @@ public class OAuth2ClientServiceImpl extends AbstractService<OAuth2Client, Long,
 
     @Override
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
-        return null;
+        return repository.findOAuth2ClientByClientId(clientId);
     }
 }

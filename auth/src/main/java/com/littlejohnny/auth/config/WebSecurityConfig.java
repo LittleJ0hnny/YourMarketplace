@@ -18,9 +18,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
-    @Qualifier("userServiceImpl")
     @Autowired
+    @Qualifier("userServiceImpl")
     private UserDetailsService userDetailsService;
 
     @Override

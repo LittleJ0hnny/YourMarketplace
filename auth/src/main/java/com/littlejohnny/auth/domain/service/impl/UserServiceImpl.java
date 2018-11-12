@@ -18,6 +18,6 @@ public class UserServiceImpl extends AbstractService<User, Long, UserRepository>
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        return repository.findUserByUsername(username);
     }
 }

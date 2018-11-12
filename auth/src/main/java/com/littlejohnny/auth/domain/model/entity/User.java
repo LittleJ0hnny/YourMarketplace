@@ -36,9 +36,11 @@ public class User implements UserDetails {
     private boolean isEnabled;
 
     public User() {
+        this.isEnabled = true;
     }
 
     public User(String username, String password, List<GrantedAuthority> authorities) {
+        this();
         this.username = username;
         this.password = password;
         this.authorities = authorities;
@@ -46,6 +48,10 @@ public class User implements UserDetails {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
