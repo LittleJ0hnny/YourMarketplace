@@ -6,6 +6,7 @@ import org.springframework.security.oauth2.provider.ClientDetails;
 
 import javax.persistence.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "oauth2_clients")
@@ -29,7 +30,7 @@ public class OAuth2Client implements ClientDetails {
     private String clientSecret;
 
     @ElementCollection
-    private Set<String> resourceIds;
+    private Set<Resource> resources;
 
     @Column
     private boolean isSecretRequired;
@@ -41,7 +42,7 @@ public class OAuth2Client implements ClientDetails {
     private Set<String> scope;
 
     @ElementCollection
-    private Set<String> authorizedGrantTypes;
+    private Set<AuthorizationGrantType> grantTypes;
 
     @ElementCollection
     private Set<String> registeredRedirectUri;
@@ -63,11 +64,11 @@ public class OAuth2Client implements ClientDetails {
         this.refreshTokenValiditySeconds = DEFAULT_REFRESH_TOKEN_VALIDITY;
     }
 
-    public OAuth2Client(String clientId, String clientSecret, Set<String> authorizedGrantTypes) {
+    public OAuth2Client(String clientId, String clientSecret, Set<AuthorizationGrantType> grantTypes) {
         this();
         this.clientId = clientId;
         this.clientSecret = clientSecret;
-        this.authorizedGrantTypes = authorizedGrantTypes;
+        this.grantTypes = grantTypes;
     }
 
     public Long getId() {
@@ -89,11 +90,15 @@ public class OAuth2Client implements ClientDetails {
 
     @Override
     public Set<String> getResourceIds() {
-        return resourceIds;
+        return resources.stream().map(Resource::getResourceId).collect(Collectors.toSet());
     }
 
-    public void setResourceIds(Set<String> resourceIds) {
-        this.resourceIds = resourceIds;
+    public Set<Resource> getResources() {
+        return resources;
+    }
+
+    public void setResources(Set<Resource> resources) {
+        this.resources = resources;
     }
 
     @Override
@@ -134,11 +139,15 @@ public class OAuth2Client implements ClientDetails {
 
     @Override
     public Set<String> getAuthorizedGrantTypes() {
-        return authorizedGrantTypes;
+        return grantTypes.stream().map(AuthorizationGrantType::getGrantType).collect(Collectors.toSet());
     }
 
-    public void setAuthorizedGrantTypes(Set<String> authorizedGrantTypes) {
-        this.authorizedGrantTypes = authorizedGrantTypes;
+    public Set<AuthorizationGrantType> getGrantTypes() {
+        return grantTypes;
+    }
+
+    public void setGrantTypes(Set<AuthorizationGrantType> grantTypes) {
+        this.grantTypes = grantTypes;
     }
 
     @Override

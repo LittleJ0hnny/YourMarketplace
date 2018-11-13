@@ -1,11 +1,15 @@
 package com.littlejohnny.auth.domain.model.dto;
 
 import com.littlejohnny.auth.domain.model.OAuth2ClientBuilder;
+import com.littlejohnny.auth.domain.model.entity.Authority;
+import com.littlejohnny.auth.domain.model.entity.AuthorizationGrantType;
 import com.littlejohnny.auth.domain.model.entity.OAuth2Client;
+import com.littlejohnny.auth.domain.model.entity.Resource;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class OAuth2ClientDTO {
     private String clientId;
@@ -14,7 +18,7 @@ public class OAuth2ClientDTO {
     private Set<String> scope;
     private Set<String> authorizedGrantTypes;
     private Set<String> registeredRedirectUri;
-    private List<GrantedAuthority> authorities;
+    private List<String> authorities;
     private Integer accessTokenValiditySeconds;
     private Integer refreshTokenValiditySeconds;
 
@@ -81,11 +85,11 @@ public class OAuth2ClientDTO {
         this.registeredRedirectUri = registeredRedirectUri;
     }
 
-    public List<GrantedAuthority> getAuthorities() {
+    public List<String> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(List<GrantedAuthority> authorities) {
+    public void setAuthorities(List<String> authorities) {
         this.authorities = authorities;
     }
 
@@ -109,11 +113,11 @@ public class OAuth2ClientDTO {
         return new OAuth2ClientBuilder()
                 .setClientId(clientId)
                 .setClientSecret(clientSecret)
-                .setResourceIds(resourceIds)
+                .setResources(resourceIds.stream().map(Resource::new).collect(Collectors.toSet()))
                 .setScope(scope)
-                .setAuthorizedGrantTypes(authorizedGrantTypes)
+                .setGrantTypes(authorizedGrantTypes.stream().map(AuthorizationGrantType::new).collect(Collectors.toSet()))
                 .setRegisteredRedirectUri(registeredRedirectUri)
-                .setAuthorities(authorities)
+                .setAuthorities(authorities.stream().map(Authority::new).collect(Collectors.toList()))
                 .setAccessTokenValiditySeconds(accessTokenValiditySeconds)
                 .setRefreshTokenValiditySeconds(refreshTokenValiditySeconds)
                 .build();

@@ -1,11 +1,9 @@
 package com.littlejohnny.auth.domain.model.entity;
 
-import com.littlejohnny.auth.domain.model.Authorities;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @ElementCollection
+    @Column(unique = true)
     private List<GrantedAuthority> authorities;
 
     @Column(nullable = false)
@@ -39,7 +37,6 @@ public class User implements UserDetails {
 
     public User() {
         this.isEnabled = true;
-        this.authorities = Arrays.asList(Authorities.USER);
     }
 
     public User(String username, String password, List<GrantedAuthority> authorities) {
