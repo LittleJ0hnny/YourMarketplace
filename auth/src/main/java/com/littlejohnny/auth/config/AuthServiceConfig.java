@@ -8,6 +8,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.oauth2.config.annotation.builders.ClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -42,7 +43,15 @@ public class AuthServiceConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.withClientDetails(clientDetailsService).build();
+        clients.inMemory()
+                .withClient("authserver")
+                .secret("{noop}passwordforauthserver")
+                .redirectUris("http://localhost:8080/")
+                .authorizedGrantTypes("password", "refresh_token")
+                .scopes("myscope")
+                .autoApprove(true)
+                .accessTokenValiditySeconds(1000)
+                .refreshTokenValiditySeconds(1800);
     }
 
     @Override

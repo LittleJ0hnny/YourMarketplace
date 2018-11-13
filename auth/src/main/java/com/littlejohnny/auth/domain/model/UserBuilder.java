@@ -3,7 +3,9 @@ package com.littlejohnny.auth.domain.model;
 import com.littlejohnny.auth.domain.model.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class UserBuilder {
     private User user;
@@ -18,7 +20,7 @@ public class UserBuilder {
     }
 
     public UserBuilder setAuthorities(List<GrantedAuthority> authorities) {
-        user.setAuthorities(authorities);
+        user.setAuthorities(Optional.ofNullable(authorities).orElse(Arrays.asList(Authorities.USER)));
         return this;
     }
 

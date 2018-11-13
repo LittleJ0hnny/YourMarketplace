@@ -4,6 +4,7 @@ import com.littlejohnny.auth.domain.model.entity.OAuth2Client;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public class OAuth2ClientBuilder {
@@ -64,12 +65,12 @@ public class OAuth2ClientBuilder {
     }
 
     public OAuth2ClientBuilder setAccessTokenValiditySeconds(Integer accessTokenValiditySeconds) {
-        oAuth2Client.setAccessTokenValiditySeconds(accessTokenValiditySeconds);
+        oAuth2Client.setAccessTokenValiditySeconds(Optional.ofNullable(accessTokenValiditySeconds).orElse(oAuth2Client.DEFAULT_ACCESS_TOKEN_VALIDITY));
         return this;
     }
 
     public OAuth2ClientBuilder setRefreshTokenValiditySeconds(Integer refreshTokenValiditySeconds) {
-        oAuth2Client.setRefreshTokenValiditySeconds(refreshTokenValiditySeconds);
+        oAuth2Client.setRefreshTokenValiditySeconds(Optional.ofNullable(refreshTokenValiditySeconds).orElse(oAuth2Client.DEFAULT_REFRESH_TOKEN_VALIDITY));
         return this;
     }
 

@@ -1,5 +1,6 @@
 package com.littlejohnny.auth.domain.model.entity;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
 
@@ -9,6 +10,14 @@ import java.util.*;
 @Entity
 @Table(name = "oauth2_clients")
 public class OAuth2Client implements ClientDetails {
+    @Transient
+    @Value("token.access.default_time")
+    public final Integer DEFAULT_ACCESS_TOKEN_VALIDITY = 1800;
+
+    @Transient
+    @Value("token.refresh.default_time")
+    public final Integer DEFAULT_REFRESH_TOKEN_VALIDITY = 86400;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -50,9 +59,8 @@ public class OAuth2Client implements ClientDetails {
     private boolean isAutoApprove;
 
     public OAuth2Client() {
-        this.isSecretRequired = true;
-        this.accessTokenValiditySeconds = 1800;
-        this.refreshTokenValiditySeconds = 86400;
+        this.accessTokenValiditySeconds = DEFAULT_ACCESS_TOKEN_VALIDITY;
+        this.refreshTokenValiditySeconds = DEFAULT_REFRESH_TOKEN_VALIDITY;
     }
 
     public OAuth2Client(String clientId, String clientSecret, Set<String> authorizedGrantTypes) {
