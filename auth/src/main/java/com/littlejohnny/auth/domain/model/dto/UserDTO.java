@@ -35,7 +35,6 @@ public class UserDTO {
         return new UserBuilder()
                 .setUsername(username)
                 .setPassword(password)
-                .setAuthorities(null)
                 .build();
     }
 }

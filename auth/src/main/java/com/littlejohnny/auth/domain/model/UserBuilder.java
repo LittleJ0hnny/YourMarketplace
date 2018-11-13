@@ -20,7 +20,7 @@ public class UserBuilder {
     }
 
     public UserBuilder setAuthorities(List<GrantedAuthority> authorities) {
-        user.setAuthorities(Optional.ofNullable(authorities).orElse(Arrays.asList(Authorities.USER)));
+        user.setAuthorities(authorities);
         return this;
     }
 
