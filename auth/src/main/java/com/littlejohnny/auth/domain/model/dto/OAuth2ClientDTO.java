@@ -2,10 +2,9 @@ package com.littlejohnny.auth.domain.model.dto;
 
 import com.littlejohnny.auth.domain.model.OAuth2ClientBuilder;
 import com.littlejohnny.auth.domain.model.entity.Authority;
-import com.littlejohnny.auth.domain.model.entity.AuthorizationGrantType;
+import com.littlejohnny.auth.domain.model.entity.AuthGrantType;
 import com.littlejohnny.auth.domain.model.entity.OAuth2Client;
 import com.littlejohnny.auth.domain.model.entity.Resource;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
 import java.util.Set;
@@ -115,7 +114,7 @@ public class OAuth2ClientDTO {
                 .setClientSecret(clientSecret)
                 .setResources(resourceIds.stream().map(Resource::new).collect(Collectors.toSet()))
                 .setScope(scope)
-                .setGrantTypes(authorizedGrantTypes.stream().map(AuthorizationGrantType::new).collect(Collectors.toSet()))
+                .setGrantTypes(authorizedGrantTypes.stream().map(AuthGrantType::new).collect(Collectors.toSet()))
                 .setRegisteredRedirectUri(registeredRedirectUri)
                 .setAuthorities(authorities.stream().map(Authority::new).collect(Collectors.toList()))
                 .setAccessTokenValiditySeconds(accessTokenValiditySeconds)

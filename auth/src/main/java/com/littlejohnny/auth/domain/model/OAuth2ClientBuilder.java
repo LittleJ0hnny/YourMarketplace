@@ -1,6 +1,6 @@
 package com.littlejohnny.auth.domain.model;
 
-import com.littlejohnny.auth.domain.model.entity.AuthorizationGrantType;
+import com.littlejohnny.auth.domain.model.entity.AuthGrantType;
 import com.littlejohnny.auth.domain.model.entity.OAuth2Client;
 import com.littlejohnny.auth.domain.model.entity.Resource;
 import org.springframework.security.core.GrantedAuthority;
@@ -51,7 +51,7 @@ public class OAuth2ClientBuilder {
         return this;
     }
 
-    public OAuth2ClientBuilder setGrantTypes(Set<AuthorizationGrantType> authorizedGrantTypes) {
+    public OAuth2ClientBuilder setGrantTypes(Set<AuthGrantType> authorizedGrantTypes) {
         oAuth2Client.setGrantTypes(authorizedGrantTypes);
         return this;
     }

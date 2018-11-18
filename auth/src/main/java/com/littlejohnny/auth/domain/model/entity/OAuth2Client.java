@@ -42,7 +42,7 @@ public class OAuth2Client implements ClientDetails {
     private Set<String> scope;
 
     @ElementCollection
-    private Set<AuthorizationGrantType> grantTypes;
+    private Set<AuthGrantType> grantTypes;
 
     @ElementCollection
     private Set<String> registeredRedirectUri;
@@ -64,7 +64,7 @@ public class OAuth2Client implements ClientDetails {
         this.refreshTokenValiditySeconds = DEFAULT_REFRESH_TOKEN_VALIDITY;
     }
 
-    public OAuth2Client(String clientId, String clientSecret, Set<AuthorizationGrantType> grantTypes) {
+    public OAuth2Client(String clientId, String clientSecret, Set<AuthGrantType> grantTypes) {
         this();
         this.clientId = clientId;
         this.clientSecret = clientSecret;
@@ -139,14 +139,14 @@ public class OAuth2Client implements ClientDetails {
 
     @Override
     public Set<String> getAuthorizedGrantTypes() {
-        return grantTypes.stream().map(AuthorizationGrantType::getGrantType).collect(Collectors.toSet());
+        return grantTypes.stream().map(AuthGrantType::getGrantType).collect(Collectors.toSet());
     }
 
-    public Set<AuthorizationGrantType> getGrantTypes() {
+    public Set<AuthGrantType> getGrantTypes() {
         return grantTypes;
     }
 
-    public void setGrantTypes(Set<AuthorizationGrantType> grantTypes) {
+    public void setGrantTypes(Set<AuthGrantType> grantTypes) {
         this.grantTypes = grantTypes;
     }
 

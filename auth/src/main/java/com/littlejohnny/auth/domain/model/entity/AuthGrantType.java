@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "grant_types")
-public class AuthorizationGrantType {
+public class AuthGrantType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -12,10 +12,10 @@ public class AuthorizationGrantType {
     @Column
     private String grantType;
 
-    public AuthorizationGrantType() {
+    public AuthGrantType() {
     }
 
-    public AuthorizationGrantType(String grantType) {
+    public AuthGrantType(String grantType) {
         this.grantType = grantType;
     }
 
