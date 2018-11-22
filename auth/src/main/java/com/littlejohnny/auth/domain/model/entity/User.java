@@ -20,8 +20,8 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @Column(unique = true)
-    private List<GrantedAuthority> authorities;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
+    private List<Authority> authorities;
 
     @Column(nullable = false)
     private boolean isExpired;
@@ -39,7 +39,7 @@ public class User implements UserDetails {
         this.isEnabled = true;
     }
 
-    public User(String username, String password, List<GrantedAuthority> authorities) {
+    public User(String username, String password, List<Authority> authorities) {
         this();
         this.username = username;
         this.password = password;
@@ -59,7 +59,7 @@ public class User implements UserDetails {
         return authorities;
     }
 
-    public void setAuthorities(List<GrantedAuthority> authorities) {
+    public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
     }
 

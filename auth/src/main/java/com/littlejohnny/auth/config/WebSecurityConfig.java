@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/oauth/token", "/user/save", "/oauth2client/save").permitAll()
+                .antMatchers("/oauth/token", "/user/**", "/oauth2client/**").permitAll()
                 .anyRequest().authenticated()
                 .and().cors().and().csrf().disable();
     }

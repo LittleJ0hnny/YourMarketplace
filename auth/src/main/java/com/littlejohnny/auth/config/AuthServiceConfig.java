@@ -43,15 +43,7 @@ public class AuthServiceConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("authserver")
-                .secret("{noop}passwordforauthserver")
-                .redirectUris("http://localhost:8080/")
-                .authorizedGrantTypes("password", "refresh_token")
-                .scopes("myscope")
-                .autoApprove(true)
-                .accessTokenValiditySeconds(1000)
-                .refreshTokenValiditySeconds(1800);
+        clients.withClientDetails(clientDetailsService).build();
     }
 
     @Override

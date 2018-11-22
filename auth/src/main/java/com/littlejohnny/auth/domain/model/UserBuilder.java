@@ -1,5 +1,6 @@
 package com.littlejohnny.auth.domain.model;
 
+import com.littlejohnny.auth.domain.model.entity.Authority;
 import com.littlejohnny.auth.domain.model.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -19,7 +20,7 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder setAuthorities(List<GrantedAuthority> authorities) {
+    public UserBuilder setAuthorities(List<Authority> authorities) {
         user.setAuthorities(authorities);
         return this;
     }

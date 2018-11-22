@@ -30,4 +30,9 @@ public class UserServiceImpl extends AbstractService<User, Long, UserRepository>
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
         super.save(entity);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
 }

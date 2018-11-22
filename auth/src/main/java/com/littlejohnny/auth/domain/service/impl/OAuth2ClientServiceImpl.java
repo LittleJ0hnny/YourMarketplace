@@ -5,12 +5,14 @@ import com.littlejohnny.auth.domain.repository.OAuth2ClientRepository;
 import com.littlejohnny.auth.domain.service.AbstractService;
 import com.littlejohnny.auth.domain.service.OAuth2ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.stereotype.Service;
 
+@Primary
 @Service
 public class OAuth2ClientServiceImpl extends AbstractService<OAuth2Client, Long, OAuth2ClientRepository> implements OAuth2ClientService, ClientDetailsService {
 

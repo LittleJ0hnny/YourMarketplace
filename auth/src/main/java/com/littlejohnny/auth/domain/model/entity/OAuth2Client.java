@@ -29,7 +29,7 @@ public class OAuth2Client implements ClientDetails {
     @Column(nullable = false)
     private String clientSecret;
 
-    @ElementCollection
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "oAuth2Clients")
     private Set<Resource> resources;
 
     @Column
@@ -41,14 +41,14 @@ public class OAuth2Client implements ClientDetails {
     @ElementCollection
     private Set<String> scope;
 
-    @ElementCollection
-    private Set<AuthGrantType> grantTypes;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "oAuth2Clients")
+    private List<AuthGrantType> grantTypes;
 
     @ElementCollection
     private Set<String> registeredRedirectUri;
 
-    @ElementCollection
-    private List<GrantedAuthority> authorities;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "oAuth2Clients")
+    private List<Authority> authorities;
 
     @Column
     private Integer accessTokenValiditySeconds;
@@ -62,9 +62,10 @@ public class OAuth2Client implements ClientDetails {
     public OAuth2Client() {
         this.accessTokenValiditySeconds = DEFAULT_ACCESS_TOKEN_VALIDITY;
         this.refreshTokenValiditySeconds = DEFAULT_REFRESH_TOKEN_VALIDITY;
+        this.isAutoApprove = true;
     }
 
-    public OAuth2Client(String clientId, String clientSecret, Set<AuthGrantType> grantTypes) {
+    public OAuth2Client(String clientId, String clientSecret, List<AuthGrantType> grantTypes) {
         this();
         this.clientId = clientId;
         this.clientSecret = clientSecret;
@@ -142,11 +143,7 @@ public class OAuth2Client implements ClientDetails {
         return grantTypes.stream().map(AuthGrantType::getGrantType).collect(Collectors.toSet());
     }
 
-    public Set<AuthGrantType> getGrantTypes() {
-        return grantTypes;
-    }
-
-    public void setGrantTypes(Set<AuthGrantType> grantTypes) {
+    public void setGrantTypes(List<AuthGrantType> grantTypes) {
         this.grantTypes = grantTypes;
     }
 
@@ -161,10 +158,10 @@ public class OAuth2Client implements ClientDetails {
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
-        return authorities;
+        return authorities.stream().map(element -> (GrantedAuthority) element).collect(Collectors.toList());
     }
 
-    public void setAuthorities(List<GrantedAuthority> authorities) {
+    public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
     }
 

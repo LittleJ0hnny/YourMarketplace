@@ -6,15 +6,14 @@ import com.littlejohnny.auth.domain.model.entity.AuthGrantType;
 import com.littlejohnny.auth.domain.model.entity.OAuth2Client;
 import com.littlejohnny.auth.domain.model.entity.Resource;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class OAuth2ClientDTO {
     private String clientId;
     private String clientSecret;
     private Set<String> resourceIds;
-    private Set<String> scope;
+    private Set<String> scopes;
     private Set<String> authorizedGrantTypes;
     private Set<String> registeredRedirectUri;
     private List<String> authorities;
@@ -28,7 +27,7 @@ public class OAuth2ClientDTO {
         this.clientId = oAuth2Client.getClientId();
         this.clientSecret = oAuth2Client.getClientSecret();
         this.resourceIds = oAuth2Client.getResourceIds();
-        this.scope = oAuth2Client.getScope();
+        this.scopes = oAuth2Client.getScope();
         this.authorizedGrantTypes = oAuth2Client.getAuthorizedGrantTypes();
         this.registeredRedirectUri = oAuth2Client.getRegisteredRedirectUri();
         this.authorities = (List) oAuth2Client.getAuthorities();
@@ -60,12 +59,12 @@ public class OAuth2ClientDTO {
         this.resourceIds = resourceIds;
     }
 
-    public Set<String> getScope() {
-        return scope;
+    public Set<String> getScopes() {
+        return scopes;
     }
 
-    public void setScope(Set<String> scope) {
-        this.scope = scope;
+    public void setScopes(Set<String> scopes) {
+        this.scopes = scopes;
     }
 
     public Set<String> getAuthorizedGrantTypes() {
@@ -112,11 +111,11 @@ public class OAuth2ClientDTO {
         return new OAuth2ClientBuilder()
                 .setClientId(clientId)
                 .setClientSecret(clientSecret)
-                .setResources(resourceIds.stream().map(Resource::new).collect(Collectors.toSet()))
-                .setScope(scope)
-                .setGrantTypes(authorizedGrantTypes.stream().map(AuthGrantType::new).collect(Collectors.toSet()))
+                .setResources(Optional.ofNullable(resourceIds).orElse(new HashSet<>()).stream().map(Resource::new).collect(Collectors.toSet()))
+                .setScope(scopes)
+                .setGrantTypes(Optional.ofNullable(authorizedGrantTypes).orElse(new HashSet<>()).stream().map(AuthGrantType::new).collect(Collectors.toList()))
                 .setRegisteredRedirectUri(registeredRedirectUri)
-                .setAuthorities(authorities.stream().map(Authority::new).collect(Collectors.toList()))
+                .setAuthorities(Optional.ofNullable(authorities).orElse(new ArrayList<>()).stream().map(Authority::new).collect(Collectors.toList()))
                 .setAccessTokenValiditySeconds(accessTokenValiditySeconds)
                 .setRefreshTokenValiditySeconds(refreshTokenValiditySeconds)
                 .build();
