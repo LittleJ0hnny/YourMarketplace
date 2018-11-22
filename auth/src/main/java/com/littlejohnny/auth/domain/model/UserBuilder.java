@@ -2,11 +2,8 @@ package com.littlejohnny.auth.domain.model;
 
 import com.littlejohnny.auth.domain.model.entity.Authority;
 import com.littlejohnny.auth.domain.model.entity.User;
-import org.springframework.security.core.GrantedAuthority;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class UserBuilder {
     private User user;

@@ -61,6 +61,7 @@ public class User implements UserDetails {
 
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
+        authorities.forEach(element -> element.addUser(this));
     }
 
     @Override

@@ -113,7 +113,7 @@ public class OAuth2ClientDTO {
                 .setClientSecret(clientSecret)
                 .setResources(Optional.ofNullable(resourceIds).orElse(new HashSet<>()).stream().map(Resource::new).collect(Collectors.toSet()))
                 .setScope(scopes)
-                .setGrantTypes(Optional.ofNullable(authorizedGrantTypes).orElse(new HashSet<>()).stream().map(AuthGrantType::new).collect(Collectors.toList()))
+                .setGrantTypes(Optional.ofNullable(authorizedGrantTypes).orElse(new HashSet<>()).stream().map(AuthGrantType::new).collect(Collectors.toSet()))
                 .setRegisteredRedirectUri(registeredRedirectUri)
                 .setAuthorities(Optional.ofNullable(authorities).orElse(new ArrayList<>()).stream().map(Authority::new).collect(Collectors.toList()))
                 .setAccessTokenValiditySeconds(accessTokenValiditySeconds)

@@ -25,9 +25,7 @@ public class UserController {
     @PostMapping("/save")
     public ResponseEntity saveUser(@RequestBody UserDTO userDTO) {
         User user = userDTO.asUser();
-        Authority authority = authorityService.getOne(1L);
-        user.setAuthorities(Arrays.asList(authority));
-        authority.addUser(user);
+        user.setAuthorities(Arrays.asList(authorityService.getOne(1L)));
         userService.save(user);
         return ResponseEntity.ok("Done!");
     }

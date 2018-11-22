@@ -17,7 +17,7 @@ public class GatewaySecurityConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.httpBasic().and().csrf().disable();
+        http.csrf().disable();
         http
                 .authorizeRequests()
                 .antMatchers("/authservice/oauth/token", "/eureka/**", "/authservice/user/**", "/authservice/oauth2client/**")

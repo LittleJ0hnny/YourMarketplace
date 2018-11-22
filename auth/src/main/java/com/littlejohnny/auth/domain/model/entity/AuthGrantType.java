@@ -13,7 +13,7 @@ public class AuthGrantType {
     @Column
     private String grantType;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "grant_type_oauth2client",
             joinColumns = { @JoinColumn(name = "grant_type_id") },

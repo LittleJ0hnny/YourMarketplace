@@ -15,7 +15,7 @@ public class Authority implements GrantedAuthority {
     @Column
     private String authority;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "authority_user",
             joinColumns = { @JoinColumn(name = "authority_id") },
@@ -23,7 +23,7 @@ public class Authority implements GrantedAuthority {
     )
     private List<User> users;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "authority_oauth2client",
             joinColumns = { @JoinColumn(name = "authority_id") },

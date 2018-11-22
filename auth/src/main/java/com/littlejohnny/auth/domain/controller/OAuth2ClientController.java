@@ -30,12 +30,11 @@ public class OAuth2ClientController {
         AuthGrantType authGrantType1 = authGrantTypeService.getOne(1L);
         AuthGrantType authGrantType2 = authGrantTypeService.getOne(2L);
         OAuth2Client oAuth2Client = oAuth2ClientDTO.asOAuth2Client();
-        List<AuthGrantType> authGrantTypes = new ArrayList<>();
+        Set<AuthGrantType> authGrantTypes = new HashSet<>();
         authGrantTypes.add(authGrantType1);
         authGrantTypes.add(authGrantType2);
         oAuth2Client.setGrantTypes(authGrantTypes);
-        authGrantType1.addOAuth2Client(oAuth2Client);
-        authGrantType2.addOAuth2Client(oAuth2Client);
+        oAuth2Client.setGrantTypes(authGrantTypes);
         oAuth2ClientService.save(oAuth2Client);
         return ResponseEntity.ok("Done!");
     }

@@ -14,7 +14,7 @@ public class Resource {
     @Column
     private String resourceId;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "resource_oAuth2Client",
             joinColumns = { @JoinColumn(name = "resource_id") },

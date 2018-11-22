@@ -42,7 +42,7 @@ public class OAuth2Client implements ClientDetails {
     private Set<String> scope;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "oAuth2Clients")
-    private List<AuthGrantType> grantTypes;
+    private Set<AuthGrantType> grantTypes;
 
     @ElementCollection
     private Set<String> registeredRedirectUri;
@@ -65,7 +65,7 @@ public class OAuth2Client implements ClientDetails {
         this.isAutoApprove = true;
     }
 
-    public OAuth2Client(String clientId, String clientSecret, List<AuthGrantType> grantTypes) {
+    public OAuth2Client(String clientId, String clientSecret, Set<AuthGrantType> grantTypes) {
         this();
         this.clientId = clientId;
         this.clientSecret = clientSecret;
@@ -100,6 +100,7 @@ public class OAuth2Client implements ClientDetails {
 
     public void setResources(Set<Resource> resources) {
         this.resources = resources;
+        resources.forEach(element -> element.addOAuth2Client(this));
     }
 
     @Override
@@ -143,8 +144,9 @@ public class OAuth2Client implements ClientDetails {
         return grantTypes.stream().map(AuthGrantType::getGrantType).collect(Collectors.toSet());
     }
 
-    public void setGrantTypes(List<AuthGrantType> grantTypes) {
+    public void setGrantTypes(Set<AuthGrantType> grantTypes) {
         this.grantTypes = grantTypes;
+        grantTypes.forEach(element -> element.addOAuth2Client(this));
     }
 
     @Override
@@ -163,6 +165,7 @@ public class OAuth2Client implements ClientDetails {
 
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
+        authorities.forEach(element -> element.addOAuth2Client(this));
     }
 
     @Override
