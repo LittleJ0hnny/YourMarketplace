@@ -27,12 +27,12 @@ public class UserController {
         User user = userDTO.asUser();
         user.setAuthorities(Arrays.asList(authorityService.getOne(1L)));
         userService.save(user);
-        return ResponseEntity.ok("Done!");
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable Long id) {
         userService.deleteById(id);
-        return ResponseEntity.ok("Deleted!");
+        return ResponseEntity.ok().build();
     }
 }

@@ -11,4 +11,8 @@ public class AuthGrantTypeServiceImpl extends AbstractService<AuthGrantType, Lon
     protected AuthGrantTypeServiceImpl(AuthGrantTypeRepository repository) {
         super(repository);
     }
+
+    public AuthGrantType findByGrantType(String grantType) {
+        return repository.findByGrantType(grantType);
+    }
 }

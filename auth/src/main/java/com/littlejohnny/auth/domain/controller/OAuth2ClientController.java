@@ -2,6 +2,7 @@ package com.littlejohnny.auth.domain.controller;
 
 import com.littlejohnny.auth.domain.model.dto.OAuth2ClientDTO;
 import com.littlejohnny.auth.domain.model.entity.AuthGrantType;
+import com.littlejohnny.auth.domain.model.entity.AuthGrantTypes;
 import com.littlejohnny.auth.domain.model.entity.OAuth2Client;
 import com.littlejohnny.auth.domain.service.AuthGrantTypeService;
 import com.littlejohnny.auth.domain.service.OAuth2ClientService;
@@ -27,16 +28,13 @@ public class OAuth2ClientController {
 
     @PostMapping("/save")
     public ResponseEntity saveClient(@RequestBody OAuth2ClientDTO oAuth2ClientDTO) {
-        AuthGrantType authGrantType1 = authGrantTypeService.getOne(1L);
-        AuthGrantType authGrantType2 = authGrantTypeService.getOne(2L);
         OAuth2Client oAuth2Client = oAuth2ClientDTO.asOAuth2Client();
         Set<AuthGrantType> authGrantTypes = new HashSet<>();
-        authGrantTypes.add(authGrantType1);
-        authGrantTypes.add(authGrantType2);
-        oAuth2Client.setGrantTypes(authGrantTypes);
+        authGrantTypes.add(authGrantTypeService.getOne(AuthGrantTypes.PASSWORD.getId()));
+        authGrantTypes.add(authGrantTypeService.getOne(AuthGrantTypes.REFRESH_TOKEN.getId()));
         oAuth2Client.setGrantTypes(authGrantTypes);
         oAuth2ClientService.save(oAuth2Client);
-        return ResponseEntity.ok("Done!");
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
