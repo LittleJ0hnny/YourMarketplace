@@ -1,5 +1,7 @@
 package com.littlejohnny.auth.domain.model.entity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -8,6 +10,7 @@ import javax.persistence.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Data
 @Entity
 @Table(name = "oauth2_clients")
 public class OAuth2Client implements ClientDetails {
@@ -23,10 +26,10 @@ public class OAuth2Client implements ClientDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String clientId;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String clientSecret;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "oAuth2Clients")
@@ -50,10 +53,10 @@ public class OAuth2Client implements ClientDetails {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "oAuth2Clients")
     private List<Authority> authorities;
 
-    @Column
+    @Column(nullable = false)
     private Integer accessTokenValiditySeconds;
 
-    @Column
+    @Column(nullable = false)
     private Integer refreshTokenValiditySeconds;
 
     @Column
@@ -72,71 +75,16 @@ public class OAuth2Client implements ClientDetails {
         this.grantTypes = grantTypes;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public String getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
 
     @Override
     public Set<String> getResourceIds() {
         return resources.stream().map(Resource::getResourceId).collect(Collectors.toSet());
     }
 
-    public Set<Resource> getResources() {
-        return resources;
-    }
 
     public void setResources(Set<Resource> resources) {
         this.resources = resources;
         resources.forEach(element -> element.addOAuth2Client(this));
-    }
-
-    @Override
-    public boolean isSecretRequired() {
-        return isSecretRequired;
-    }
-
-    public void setSecretRequired(boolean secretRequired) {
-        isSecretRequired = secretRequired;
-    }
-
-    @Override
-    public String getClientSecret() {
-        return clientSecret;
-    }
-
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
-    }
-
-    @Override
-    public boolean isScoped() {
-        return isScoped;
-    }
-
-    public void setScoped(boolean scoped) {
-        isScoped = scoped;
-    }
-
-    @Override
-    public Set<String> getScope() {
-        return scope;
-    }
-
-    public void setScope(Set<String> scope) {
-        this.scope = scope;
     }
 
     @Override
@@ -150,15 +98,6 @@ public class OAuth2Client implements ClientDetails {
     }
 
     @Override
-    public Set<String> getRegisteredRedirectUri() {
-        return registeredRedirectUri;
-    }
-
-    public void setRegisteredRedirectUri(Set<String> registeredRedirectUri) {
-        this.registeredRedirectUri = registeredRedirectUri;
-    }
-
-    @Override
     public Collection<GrantedAuthority> getAuthorities() {
         return authorities.stream().map(element -> (GrantedAuthority) element).collect(Collectors.toList());
     }
@@ -169,34 +108,12 @@ public class OAuth2Client implements ClientDetails {
     }
 
     @Override
-    public Integer getAccessTokenValiditySeconds() {
-        return accessTokenValiditySeconds;
-    }
-
-    public void setAccessTokenValiditySeconds(Integer accessTokenValiditySeconds) {
-        this.accessTokenValiditySeconds = accessTokenValiditySeconds;
-    }
-
-    @Override
-    public Integer getRefreshTokenValiditySeconds() {
-        return refreshTokenValiditySeconds;
-    }
-
-    public void setRefreshTokenValiditySeconds(Integer refreshTokenValiditySeconds) {
-        this.refreshTokenValiditySeconds = refreshTokenValiditySeconds;
-    }
-
-    @Override
     public boolean isAutoApprove(String scope) {
         return isAutoApprove;
     }
 
-    public void setAutoApprove(boolean autoApprove) {
-        isAutoApprove = autoApprove;
-    }
-
     @Override
     public Map<String, Object> getAdditionalInformation() {
-        return null;
+        return new HashMap<>();
     }
 }

@@ -1,16 +1,22 @@
 package com.littlejohnny.auth.domain.model.entity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+
 import javax.persistence.*;
 import java.util.List;
 
+@Data
 @Entity
+@NoArgsConstructor
 @Table(name = "grant_types")
 public class AuthGrantType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String grantType;
 
     @ManyToMany(cascade = { CascadeType.ALL })
@@ -21,38 +27,11 @@ public class AuthGrantType {
     )
     private List<OAuth2Client> oAuth2Clients;
 
-    public AuthGrantType() {
-    }
-
-    public void addOAuth2Client(OAuth2Client oAuth2Client) {
-        oAuth2Clients.add(oAuth2Client);
-    }
-
     public AuthGrantType(String grantType) {
         this.grantType = grantType;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getGrantType() {
-        return grantType;
-    }
-
-    public void setGrantType(String grantType) {
-        this.grantType = grantType;
-    }
-
-    public List<OAuth2Client> getoAuth2Clients() {
-        return oAuth2Clients;
-    }
-
-    public void setoAuth2Clients(List<OAuth2Client> oAuth2Clients) {
-        this.oAuth2Clients = oAuth2Clients;
+    public void addOAuth2Client(OAuth2Client oAuth2Client) {
+        oAuth2Clients.add(oAuth2Client);
     }
 }

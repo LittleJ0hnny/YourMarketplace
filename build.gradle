@@ -9,6 +9,7 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
+
 group 'com.littlejohnny'
 version '1.0-SNAPSHOT'
 
@@ -38,6 +39,7 @@ subprojects {
         implementation('org.springframework.boot:spring-boot-starter')
         implementation('javax.xml.bind:jaxb-api:2.3.0')
         testImplementation('org.springframework.boot:spring-boot-starter-test')
+        compileOnly('org.projectlombok:lombok:1.18.4')
     }
 }
 

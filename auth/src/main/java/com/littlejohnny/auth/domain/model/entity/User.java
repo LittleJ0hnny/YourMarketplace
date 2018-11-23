@@ -1,5 +1,6 @@
 package com.littlejohnny.auth.domain.model.entity;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -7,6 +8,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
@@ -46,40 +48,9 @@ public class User implements UserDetails {
         this.authorities = authorities;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
         authorities.forEach(element -> element.addUser(this));
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     @Override
@@ -87,34 +58,13 @@ public class User implements UserDetails {
         return !isExpired;
     }
 
-    public void setExpired(boolean expired) {
-        isExpired = expired;
-    }
-
     @Override
     public boolean isAccountNonLocked() {
         return !isLocked;
     }
 
-    public void setLocked(boolean locked) {
-        isLocked = locked;
-    }
-
     @Override
     public boolean isCredentialsNonExpired() {
         return !isCredentialsExpired;
-    }
-
-    public void setCredentialsExpired(boolean credentialsExpired) {
-        isCredentialsExpired = credentialsExpired;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return isEnabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        isEnabled = enabled;
     }
 }

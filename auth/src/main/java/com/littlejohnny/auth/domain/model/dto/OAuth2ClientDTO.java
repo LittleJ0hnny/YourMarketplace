@@ -5,10 +5,15 @@ import com.littlejohnny.auth.domain.model.entity.Authority;
 import com.littlejohnny.auth.domain.model.entity.AuthGrantType;
 import com.littlejohnny.auth.domain.model.entity.OAuth2Client;
 import com.littlejohnny.auth.domain.model.entity.Resource;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Data
+@NoArgsConstructor
 public class OAuth2ClientDTO {
     private String clientId;
     private String clientSecret;
@@ -20,9 +25,6 @@ public class OAuth2ClientDTO {
     private Integer accessTokenValiditySeconds;
     private Integer refreshTokenValiditySeconds;
 
-    public OAuth2ClientDTO() {
-    }
-
     public OAuth2ClientDTO(OAuth2Client oAuth2Client) {
         this.clientId = oAuth2Client.getClientId();
         this.clientSecret = oAuth2Client.getClientSecret();
@@ -30,81 +32,9 @@ public class OAuth2ClientDTO {
         this.scopes = oAuth2Client.getScope();
         this.authorizedGrantTypes = oAuth2Client.getAuthorizedGrantTypes();
         this.registeredRedirectUri = oAuth2Client.getRegisteredRedirectUri();
-        this.authorities = (List) oAuth2Client.getAuthorities();
+        this.authorities = Optional.ofNullable(oAuth2Client.getAuthorities()).orElse(new ArrayList<>()).stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
         this.accessTokenValiditySeconds = oAuth2Client.getAccessTokenValiditySeconds();
         this.refreshTokenValiditySeconds = oAuth2Client.getRefreshTokenValiditySeconds();
-    }
-
-    public String getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
-
-    public String getClientSecret() {
-        return clientSecret;
-    }
-
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
-    }
-
-    public Set<String> getResourceIds() {
-        return resourceIds;
-    }
-
-    public void setResourceIds(Set<String> resourceIds) {
-        this.resourceIds = resourceIds;
-    }
-
-    public Set<String> getScopes() {
-        return scopes;
-    }
-
-    public void setScopes(Set<String> scopes) {
-        this.scopes = scopes;
-    }
-
-    public Set<String> getAuthorizedGrantTypes() {
-        return authorizedGrantTypes;
-    }
-
-    public void setAuthorizedGrantTypes(Set<String> authorizedGrantTypes) {
-        this.authorizedGrantTypes = authorizedGrantTypes;
-    }
-
-    public Set<String> getRegisteredRedirectUri() {
-        return registeredRedirectUri;
-    }
-
-    public void setRegisteredRedirectUri(Set<String> registeredRedirectUri) {
-        this.registeredRedirectUri = registeredRedirectUri;
-    }
-
-    public List<String> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(List<String> authorities) {
-        this.authorities = authorities;
-    }
-
-    public Integer getAccessTokenValiditySeconds() {
-        return accessTokenValiditySeconds;
-    }
-
-    public void setAccessTokenValiditySeconds(Integer accessTokenValiditySeconds) {
-        this.accessTokenValiditySeconds = accessTokenValiditySeconds;
-    }
-
-    public Integer getRefreshTokenValiditySeconds() {
-        return refreshTokenValiditySeconds;
-    }
-
-    public void setRefreshTokenValiditySeconds(Integer refreshTokenValiditySeconds) {
-        this.refreshTokenValiditySeconds = refreshTokenValiditySeconds;
     }
 
     public OAuth2Client asOAuth2Client() {
