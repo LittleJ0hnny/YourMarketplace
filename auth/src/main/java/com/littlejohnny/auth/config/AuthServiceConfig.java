@@ -36,6 +36,9 @@ public class AuthServiceConfig extends AuthorizationServerConfigurerAdapter {
     private String keyPassword;
 
     @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
@@ -50,7 +53,7 @@ public class AuthServiceConfig extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
                 .accessTokenConverter(jwtAccessTokenConverter())
-                .authenticationManager(authenticationManager);
+                .authenticationManager(authenticationManager).userDetailsService(userDetailsService);
     }
 
     @Bean

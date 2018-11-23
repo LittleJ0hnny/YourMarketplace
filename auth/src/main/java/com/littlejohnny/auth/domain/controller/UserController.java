@@ -1,6 +1,7 @@
 package com.littlejohnny.auth.domain.controller;
 
 import com.littlejohnny.auth.domain.model.dto.UserDTO;
+import com.littlejohnny.auth.domain.model.entity.Authorities;
 import com.littlejohnny.auth.domain.model.entity.Authority;
 import com.littlejohnny.auth.domain.model.entity.User;
 import com.littlejohnny.auth.domain.service.AuthorityService;
@@ -25,7 +26,7 @@ public class UserController {
     @PostMapping("/save")
     public ResponseEntity saveUser(@RequestBody UserDTO userDTO) {
         User user = userDTO.asUser();
-        user.setAuthorities(Arrays.asList(authorityService.getOne(1L)));
+        user.setAuthorities(Arrays.asList(authorityService.getOne(Authorities.USER.getId())));
         userService.save(user);
         return ResponseEntity.ok().build();
     }
