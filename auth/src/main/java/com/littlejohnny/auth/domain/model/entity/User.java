@@ -1,6 +1,9 @@
 package com.littlejohnny.auth.domain.model.entity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,8 +11,10 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
@@ -36,10 +41,6 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private boolean isEnabled;
-
-    public User() {
-        this.isEnabled = true;
-    }
 
     public User(String username, String password, List<Authority> authorities) {
         this();

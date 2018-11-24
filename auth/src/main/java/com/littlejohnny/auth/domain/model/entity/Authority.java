@@ -1,14 +1,13 @@
 package com.littlejohnny.auth.domain.model.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "authorities")
@@ -34,7 +33,7 @@ public class Authority implements GrantedAuthority {
             joinColumns = { @JoinColumn(name = "authority_id") },
             inverseJoinColumns = { @JoinColumn(name = "oauth2client_id") }
     )
-    private List<OAuth2Client> oAuth2Clients;
+    private List<OAuth2Client> oauth2Clients;
 
     public Authority(String authority) {
         this.authority = authority;
@@ -45,6 +44,6 @@ public class Authority implements GrantedAuthority {
     }
 
     public void addOAuth2Client(OAuth2Client oAuth2Client) {
-        oAuth2Clients.add(oAuth2Client);
+        oauth2Clients.add(oAuth2Client);
     }
 }

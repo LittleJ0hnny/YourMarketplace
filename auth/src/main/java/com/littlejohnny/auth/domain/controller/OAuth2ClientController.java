@@ -28,10 +28,10 @@ public class OAuth2ClientController {
 
     @PostMapping("/save")
     public ResponseEntity saveClient(@RequestBody OAuth2ClientDTO oAuth2ClientDTO) {
-        OAuth2Client oAuth2Client = oAuth2ClientDTO.asOAuth2Client();
         Set<AuthGrantType> authGrantTypes = new HashSet<>();
         authGrantTypes.add(authGrantTypeService.getOne(AuthGrantTypes.PASSWORD.getId()));
         authGrantTypes.add(authGrantTypeService.getOne(AuthGrantTypes.REFRESH_TOKEN.getId()));
+        OAuth2Client oAuth2Client = oAuth2ClientDTO.asOAuth2Client();
         oAuth2Client.setGrantTypes(authGrantTypes);
         oAuth2ClientService.save(oAuth2Client);
         return ResponseEntity.ok().build();

@@ -1,13 +1,12 @@
 package com.littlejohnny.auth.domain.model.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "grant_types")
@@ -23,15 +22,15 @@ public class AuthGrantType {
     @JoinTable(
             name = "grant_type_oauth2client",
             joinColumns = { @JoinColumn(name = "grant_type_id") },
-            inverseJoinColumns = { @JoinColumn(name = "oAuth2Client_id") }
+            inverseJoinColumns = { @JoinColumn(name = "oauth2client_id") }
     )
-    private List<OAuth2Client> oAuth2Clients;
+    private List<OAuth2Client> oauth2Clients;
 
     public AuthGrantType(String grantType) {
         this.grantType = grantType;
     }
 
     public void addOAuth2Client(OAuth2Client oAuth2Client) {
-        oAuth2Clients.add(oAuth2Client);
+        oauth2Clients.add(oAuth2Client);
     }
 }

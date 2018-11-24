@@ -1,7 +1,6 @@
 package com.littlejohnny.auth.domain.model.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -10,7 +9,8 @@ import javax.persistence.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "oauth2_clients")
 public class OAuth2Client implements ClientDetails {
@@ -32,7 +32,7 @@ public class OAuth2Client implements ClientDetails {
     @Column(unique = true, nullable = false)
     private String clientSecret;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "oAuth2Clients")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "oauth2Clients")
     private Set<Resource> resources;
 
     @Column
@@ -44,13 +44,13 @@ public class OAuth2Client implements ClientDetails {
     @ElementCollection
     private Set<String> scope;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "oAuth2Clients")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "oauth2Clients")
     private Set<AuthGrantType> grantTypes;
 
     @ElementCollection
     private Set<String> registeredRedirectUri;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "oAuth2Clients")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "oauth2Clients")
     private List<Authority> authorities;
 
     @Column(nullable = false)
@@ -75,12 +75,10 @@ public class OAuth2Client implements ClientDetails {
         this.grantTypes = grantTypes;
     }
 
-
     @Override
     public Set<String> getResourceIds() {
         return resources.stream().map(Resource::getResourceId).collect(Collectors.toSet());
     }
-
 
     public void setResources(Set<Resource> resources) {
         this.resources = resources;
