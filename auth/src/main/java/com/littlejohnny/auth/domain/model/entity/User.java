@@ -1,20 +1,18 @@
 package com.littlejohnny.auth.domain.model.entity;
 
+import com.littlejohnny.auth.util.CollectionMapper;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-@Getter
-@Setter
+@Data
 @Entity
-@NoArgsConstructor
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
@@ -27,8 +25,8 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
-    private List<Authority> authorities;
+    @Column(nullable = false)
+    private String authorities;
 
     @Column(nullable = false)
     private boolean isExpired;
@@ -42,16 +40,24 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private boolean isEnabled;
 
-    public User(String username, String password, List<Authority> authorities) {
+    public User() {
+        this.isEnabled = true;
+    }
+
+    public User(String username, String password, String authorities) {
         this();
         this.username = username;
         this.password = password;
         this.authorities = authorities;
     }
 
-    public void setAuthorities(List<Authority> authorities) {
-        this.authorities = authorities;
-        authorities.forEach(element -> element.addUser(this));
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return CollectionMapper.stringToSet(authorities).stream().map(Authority::new).collect(Collectors.toSet());
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = CollectionMapper.collectionToString(authorities);
     }
 
     @Override

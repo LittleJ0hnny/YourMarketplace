@@ -1,16 +1,16 @@
 package com.littlejohnny.auth.domain.model.entity;
 
 public enum Authorities {
-    ADMIN(1L),
-    USER(2L);
+    ADMIN("ADMIN"),
+    USER("USER");
 
-    private Long id;
+    private String authority;
 
-    Authorities(Long id) {
-        this.id = id;
+    Authorities(String authority) {
+        this.authority = authority;
     }
 
-    public Long getId() {
-        return id;
+    public String getAuthority() {
+        return authority;
     }
 }

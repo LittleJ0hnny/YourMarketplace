@@ -27,7 +27,7 @@ public class OAuth2ClientBuilder {
     }
 
     public OAuth2ClientBuilder setResources(Set<Resource> resourceIds) {
-        oAuth2Client.setResources(resourceIds);
+        oAuth2Client.setResourceIds(resourceIds);
         return this;
     }
 
@@ -52,7 +52,7 @@ public class OAuth2ClientBuilder {
     }
 
     public OAuth2ClientBuilder setGrantTypes(Set<AuthGrantType> authorizedGrantTypes) {
-        oAuth2Client.setGrantTypes(authorizedGrantTypes);
+        oAuth2Client.setAuthorizedGrantTypes(authorizedGrantTypes);
         return this;
     }
 

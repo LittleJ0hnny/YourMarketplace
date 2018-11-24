@@ -1,16 +1,16 @@
 package com.littlejohnny.auth.domain.model.entity;
 
 public enum AuthGrantTypes {
-    PASSWORD(1L),
-    REFRESH_TOKEN(2L);
+    PASSWORD("password"),
+    REFRESH_TOKEN("refresh_token");
 
-    private Long id;
+    private String authGrantType;
 
-    AuthGrantTypes(Long id) {
-        this.id = id;
+    AuthGrantTypes(String authGrantType) {
+        this.authGrantType = authGrantType;
     }
 
-    public Long getId() {
-        return id;
+    public String getAuthGrantType() {
+        return authGrantType;
     }
 }

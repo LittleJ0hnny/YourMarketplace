@@ -1,5 +1,6 @@
 package com.littlejohnny.auth.domain.model.entity;
 
+import com.littlejohnny.auth.util.CollectionMapper;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,8 +10,7 @@ import javax.persistence.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "oauth2_clients")
 public class OAuth2Client implements ClientDetails {
@@ -32,8 +32,8 @@ public class OAuth2Client implements ClientDetails {
     @Column(unique = true, nullable = false)
     private String clientSecret;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "oauth2Clients")
-    private Set<Resource> resources;
+    @Column
+    private String resourceIds;
 
     @Column
     private boolean isSecretRequired;
@@ -44,14 +44,14 @@ public class OAuth2Client implements ClientDetails {
     @ElementCollection
     private Set<String> scope;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "oauth2Clients")
-    private Set<AuthGrantType> grantTypes;
+    @Column(nullable = false)
+    private String authorizedGrantTypes;
 
     @ElementCollection
     private Set<String> registeredRedirectUri;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "oauth2Clients")
-    private List<Authority> authorities;
+    @Column
+    private String authorities;
 
     @Column(nullable = false)
     private Integer accessTokenValiditySeconds;
@@ -68,41 +68,38 @@ public class OAuth2Client implements ClientDetails {
         this.isAutoApprove = true;
     }
 
-    public OAuth2Client(String clientId, String clientSecret, Set<AuthGrantType> grantTypes) {
+    public OAuth2Client(String clientId, String clientSecret, String authorizedGrantTypes) {
         this();
         this.clientId = clientId;
         this.clientSecret = clientSecret;
-        this.grantTypes = grantTypes;
+        this.authorizedGrantTypes = authorizedGrantTypes;
     }
 
     @Override
     public Set<String> getResourceIds() {
-        return resources.stream().map(Resource::getResourceId).collect(Collectors.toSet());
+        return CollectionMapper.stringToSet(resourceIds);
     }
 
-    public void setResources(Set<Resource> resources) {
-        this.resources = resources;
-        resources.forEach(element -> element.addOAuth2Client(this));
+    public void setResourceIds(Set<Resource> resources) {
+        this.resourceIds = CollectionMapper.collectionToString(resources);
     }
 
     @Override
     public Set<String> getAuthorizedGrantTypes() {
-        return grantTypes.stream().map(AuthGrantType::getGrantType).collect(Collectors.toSet());
+        return CollectionMapper.stringToSet(authorizedGrantTypes);
     }
 
-    public void setGrantTypes(Set<AuthGrantType> grantTypes) {
-        this.grantTypes = grantTypes;
-        grantTypes.forEach(element -> element.addOAuth2Client(this));
+    public void setAuthorizedGrantTypes(Set<AuthGrantType> authGrantTypes) {
+        this.authorizedGrantTypes = CollectionMapper.collectionToString(authGrantTypes);
     }
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
-        return authorities.stream().map(element -> (GrantedAuthority) element).collect(Collectors.toList());
+        return CollectionMapper.stringToSet(authorities).stream().map(Authority::new).collect(Collectors.toSet());
     }
 
     public void setAuthorities(List<Authority> authorities) {
-        this.authorities = authorities;
-        authorities.forEach(element -> element.addOAuth2Client(this));
+        this.authorities = CollectionMapper.collectionToString(authorities);
     }
 
     @Override

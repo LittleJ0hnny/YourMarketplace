@@ -1,8 +1,8 @@
 package com.littlejohnny.auth.domain.model.dto;
 
 import com.littlejohnny.auth.domain.model.OAuth2ClientBuilder;
-import com.littlejohnny.auth.domain.model.entity.Authority;
 import com.littlejohnny.auth.domain.model.entity.AuthGrantType;
+import com.littlejohnny.auth.domain.model.entity.Authority;
 import com.littlejohnny.auth.domain.model.entity.OAuth2Client;
 import com.littlejohnny.auth.domain.model.entity.Resource;
 import lombok.Data;
