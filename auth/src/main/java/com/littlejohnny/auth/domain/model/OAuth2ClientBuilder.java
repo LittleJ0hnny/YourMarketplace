@@ -1,9 +1,6 @@
 package com.littlejohnny.auth.domain.model;
 
-import com.littlejohnny.auth.domain.model.entity.AuthGrantType;
-import com.littlejohnny.auth.domain.model.entity.Authority;
 import com.littlejohnny.auth.domain.model.entity.OAuth2Client;
-import com.littlejohnny.auth.domain.model.entity.Resource;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +23,7 @@ public class OAuth2ClientBuilder {
         return this;
     }
 
-    public OAuth2ClientBuilder setResources(Set<Resource> resourceIds) {
+    public OAuth2ClientBuilder setResources(Set<Resources> resourceIds) {
         oAuth2Client.setResourceIds(resourceIds);
         return this;
     }
@@ -46,12 +43,12 @@ public class OAuth2ClientBuilder {
         return this;
     }
 
-    public OAuth2ClientBuilder setScope(Set<String> scope) {
+    public OAuth2ClientBuilder setScope(Set<Scopes> scope) {
         oAuth2Client.setScope(scope);
         return this;
     }
 
-    public OAuth2ClientBuilder setGrantTypes(Set<AuthGrantType> authorizedGrantTypes) {
+    public OAuth2ClientBuilder setGrantTypes(Set<AuthGrantTypes> authorizedGrantTypes) {
         oAuth2Client.setAuthorizedGrantTypes(authorizedGrantTypes);
         return this;
     }
@@ -61,7 +58,7 @@ public class OAuth2ClientBuilder {
         return this;
     }
 
-    public OAuth2ClientBuilder setAuthorities(List<Authority> authorities) {
+    public OAuth2ClientBuilder setAuthorities(List<Authorities> authorities) {
         oAuth2Client.setAuthorities(authorities);
         return this;
     }

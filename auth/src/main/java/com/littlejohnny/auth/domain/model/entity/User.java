@@ -1,8 +1,8 @@
 package com.littlejohnny.auth.domain.model.entity;
 
+import com.littlejohnny.auth.domain.model.Authorities;
 import com.littlejohnny.auth.util.CollectionMapper;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -53,11 +53,11 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return CollectionMapper.stringToSet(authorities).stream().map(Authority::new).collect(Collectors.toSet());
+        return CollectionMapper.stringToSet(authorities).stream().map(element -> (GrantedAuthority) () -> element).collect(Collectors.toSet());
     }
 
-    public void setAuthorities(Set<Authority> authorities) {
-        this.authorities = CollectionMapper.collectionToString(authorities);
+    public void setAuthorities(Set<Authorities> authorities) {
+        this.authorities = CollectionMapper.collectionToString(authorities.stream().map(Authorities::getValue).collect(Collectors.toSet()));
     }
 
     @Override

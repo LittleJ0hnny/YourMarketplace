@@ -8,15 +8,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CollectionMapper {
-    public static String collectionToString(Collection collection) {
+    public static String collectionToString(Collection<String> collection) {
         return Arrays.toString(collection.toArray());
     }
 
-    public static List<String> stringToList(String stringifiedCollection) {
-        return Stream.of(stringifiedCollection.replace("[", "").replace("]", "").split(",")).map(String::trim).collect(Collectors.toList());
+    public static List<String> stringToList(String stringCollection) {
+        return Stream.of(stringCollection.replace("[", "").replace("]", "").split(",")).map(String::trim).collect(Collectors.toList());
     }
 
-    public static Set<String> stringToSet(String stringifiedCollection) {
-        return Stream.of(stringifiedCollection.replace("[", "").replace("]", "").split(",")).map(String::trim).collect(Collectors.toSet());
+    public static Set<String> stringToSet(String stringCollection) {
+        return Stream.of(stringCollection.replace("[", "").replace("]", "").split(",")).map(String::trim).collect(Collectors.toSet());
     }
 }

@@ -1,10 +1,9 @@
 package com.littlejohnny.auth.domain.model.dto;
 
-import com.littlejohnny.auth.domain.model.OAuth2ClientBuilder;
-import com.littlejohnny.auth.domain.model.entity.AuthGrantType;
-import com.littlejohnny.auth.domain.model.entity.Authority;
+import com.littlejohnny.auth.domain.model.*;
+import com.littlejohnny.auth.domain.model.AuthGrantTypes;
+import com.littlejohnny.auth.domain.model.Authorities;
 import com.littlejohnny.auth.domain.model.entity.OAuth2Client;
-import com.littlejohnny.auth.domain.model.entity.Resource;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -41,11 +40,11 @@ public class OAuth2ClientDTO {
         return new OAuth2ClientBuilder()
                 .setClientId(clientId)
                 .setClientSecret(clientSecret)
-                .setResources(Optional.ofNullable(resourceIds).orElse(new HashSet<>()).stream().map(Resource::new).collect(Collectors.toSet()))
-                .setScope(scopes)
-                .setGrantTypes(Optional.ofNullable(authorizedGrantTypes).orElse(new HashSet<>()).stream().map(AuthGrantType::new).collect(Collectors.toSet()))
+                .setResources(Optional.ofNullable(resourceIds).orElse(new HashSet<>()).stream().map(Resources::valueOf).collect(Collectors.toSet()))
+                .setScope(Optional.ofNullable(scopes).orElse(new HashSet<>()).stream().map(Scopes::valueOf).collect(Collectors.toSet()))
+                .setGrantTypes(Optional.ofNullable(authorizedGrantTypes).orElse(new HashSet<>()).stream().map(AuthGrantTypes::valueOf).collect(Collectors.toSet()))
                 .setRegisteredRedirectUri(registeredRedirectUri)
-                .setAuthorities(Optional.ofNullable(authorities).orElse(new ArrayList<>()).stream().map(Authority::new).collect(Collectors.toList()))
+                .setAuthorities(Optional.ofNullable(authorities).orElse(new ArrayList<>()).stream().map(Authorities::valueOf).collect(Collectors.toList()))
                 .setAccessTokenValiditySeconds(accessTokenValiditySeconds)
                 .setRefreshTokenValiditySeconds(refreshTokenValiditySeconds)
                 .build();

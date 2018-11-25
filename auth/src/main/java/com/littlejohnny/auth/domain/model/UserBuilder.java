@@ -1,6 +1,5 @@
 package com.littlejohnny.auth.domain.model;
 
-import com.littlejohnny.auth.domain.model.entity.Authority;
 import com.littlejohnny.auth.domain.model.entity.User;
 
 import java.util.Set;
@@ -17,8 +16,7 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder setAuthorities(Set<Authority> authorities) {
-
+    public UserBuilder setAuthorities(Set<Authorities> authorities) {
         user.setAuthorities(authorities);
         return this;
     }

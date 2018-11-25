@@ -1,5 +1,9 @@
 package com.littlejohnny.auth.domain.model.entity;
 
+import com.littlejohnny.auth.domain.model.AuthGrantTypes;
+import com.littlejohnny.auth.domain.model.Authorities;
+import com.littlejohnny.auth.domain.model.Resources;
+import com.littlejohnny.auth.domain.model.Scopes;
 import com.littlejohnny.auth.util.CollectionMapper;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,8 +45,8 @@ public class OAuth2Client implements ClientDetails {
     @Column
     private boolean isScoped;
 
-    @ElementCollection
-    private Set<String> scope;
+    @Column
+    private String scope;
 
     @Column(nullable = false)
     private String authorizedGrantTypes;
@@ -80,8 +84,17 @@ public class OAuth2Client implements ClientDetails {
         return CollectionMapper.stringToSet(resourceIds);
     }
 
-    public void setResourceIds(Set<Resource> resources) {
-        this.resourceIds = CollectionMapper.collectionToString(resources);
+    @Override
+    public Set<String> getScope() {
+        return CollectionMapper.stringToSet(scope);
+    }
+
+    public void setScope(Set<Scopes> scopes) {
+        this.scope = CollectionMapper.collectionToString(scopes.stream().map(Scopes::getValue).collect(Collectors.toSet()));
+    }
+
+    public void setResourceIds(Set<Resources> resources) {
+        this.resourceIds = CollectionMapper.collectionToString(resources.stream().map(Resources::getValue).collect(Collectors.toSet()));
     }
 
     @Override
@@ -89,17 +102,17 @@ public class OAuth2Client implements ClientDetails {
         return CollectionMapper.stringToSet(authorizedGrantTypes);
     }
 
-    public void setAuthorizedGrantTypes(Set<AuthGrantType> authGrantTypes) {
-        this.authorizedGrantTypes = CollectionMapper.collectionToString(authGrantTypes);
+    public void setAuthorizedGrantTypes(Set<AuthGrantTypes> authGrantTypes) {
+        this.authorizedGrantTypes = CollectionMapper.collectionToString(authGrantTypes.stream().map(AuthGrantTypes::getValue).collect(Collectors.toSet()));
     }
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
-        return CollectionMapper.stringToSet(authorities).stream().map(Authority::new).collect(Collectors.toSet());
+        return CollectionMapper.stringToSet(authorities).stream().map(element -> (GrantedAuthority) () -> element).collect(Collectors.toSet());
     }
 
-    public void setAuthorities(List<Authority> authorities) {
-        this.authorities = CollectionMapper.collectionToString(authorities);
+    public void setAuthorities(List<Authorities> authorities) {
+        this.authorities = CollectionMapper.collectionToString(authorities.stream().map(Authorities::getValue).collect(Collectors.toSet()));
     }
 
     @Override

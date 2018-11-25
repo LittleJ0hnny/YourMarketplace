@@ -1,16 +1,11 @@
 package com.littlejohnny.auth.domain.controller;
 
 import com.littlejohnny.auth.domain.model.dto.OAuth2ClientDTO;
-import com.littlejohnny.auth.domain.model.entity.AuthGrantType;
-import com.littlejohnny.auth.domain.model.entity.AuthGrantTypes;
 import com.littlejohnny.auth.domain.model.entity.OAuth2Client;
 import com.littlejohnny.auth.domain.service.OAuth2ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/oauth2client/")
