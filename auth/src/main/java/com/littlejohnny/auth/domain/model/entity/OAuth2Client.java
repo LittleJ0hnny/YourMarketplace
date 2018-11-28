@@ -36,7 +36,7 @@ public class OAuth2Client implements ClientDetails {
     @Column(unique = true, nullable = false)
     private String clientSecret;
 
-    @Column
+    @Column(unique = true)
     private String resourceIds;
 
     @Column

@@ -1,9 +1,6 @@
 package com.littlejohnny.auth.util;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,10 +10,18 @@ public class CollectionMapper {
     }
 
     public static List<String> stringToList(String stringCollection) {
-        return Stream.of(stringCollection.replace("[", "").replace("]", "").split(",")).map(String::trim).collect(Collectors.toList());
+        String array = stringCollection.replace("[", "").replace("]", "");
+        if(array.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return Stream.of(array.split(",")).map(String::trim).collect(Collectors.toList());
     }
 
     public static Set<String> stringToSet(String stringCollection) {
-        return Stream.of(stringCollection.replace("[", "").replace("]", "").split(",")).map(String::trim).collect(Collectors.toSet());
+        String array = stringCollection.replace("[", "").replace("]", "");
+        if(array.isEmpty()) {
+            return new HashSet<>();
+        }
+        return Stream.of(array.split(",")).map(String::trim).collect(Collectors.toSet());
     }
 }
