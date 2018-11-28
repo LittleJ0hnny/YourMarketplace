@@ -6,3 +6,5 @@
 5.Add logger.
 
 for dev dependencies npm install --save-dev @angular-devkit/build-angular
+
+SET @@global.time_zone='+00:00'

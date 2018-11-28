@@ -1,7 +1,8 @@
 package com.littlejohnny.auth.domain.model;
 
 public enum Resources {
-    RESOURCE("resourceId");
+    IMAGE_SERVICE("image-service"),
+    GATEWAY_SERVICE("gateway");
 
     private String value;
 
