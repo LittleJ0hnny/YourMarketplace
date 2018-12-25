@@ -1,5 +1,4 @@
 rootProject.name = 'YourMarketplace'
-include 'core'
 include 'img-service'
 include 'config'
 include 'discovery'
