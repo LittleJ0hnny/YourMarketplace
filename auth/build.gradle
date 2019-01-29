@@ -1,11 +1,6 @@
 group 'com.littlejohnny'
 version '1.0-SNAPSHOT'
 
-ext {
-    mysql_connector_version = '8.0.11'
-    liquibase_version = '3.6.2'
-}
-
 configurations {
     liquibase
 }
@@ -15,15 +10,15 @@ bootJar {
 }
 
 dependencies {
-    implementation('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
-    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
-    implementation('org.springframework.cloud:spring-cloud-starter-config')
-    implementation('org.springframework.cloud:spring-cloud-starter-oauth2')
-    implementation('org.springframework.boot:spring-boot-starter-web')
-    implementation('mysql:mysql-connector-java:8.0.11')
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.cloud:spring-cloud-starter-config")
+    implementation("org.springframework.cloud:spring-cloud-starter-oauth2")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("mysql:mysql-connector-java:${mysql_connector_version}")
 
-    liquibase ('org.liquibase:liquibase-core:3.6.2')
-    liquibase ('mysql:mysql-connector-java:8.0.11')
+    liquibase ("org.liquibase:liquibase-core:${liquibase_version}")
+    liquibase ("mysql:mysql-connector-java:${mysql_connector_version}")
 }
 
 task generateBackup(type: JavaExec) {
