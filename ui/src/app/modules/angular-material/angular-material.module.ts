@@ -15,7 +15,8 @@ import {
   MatSnackBarModule,
   MatTabsModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatRippleModule
 } from '@angular/material';
 
 @NgModule({
@@ -35,7 +36,8 @@ import {
     MatSnackBarModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatRippleModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -52,7 +54,8 @@ import {
     MatSnackBarModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatRippleModule
   ],
   declarations: []
 })

@@ -12,6 +12,7 @@ import {LoginComponent} from '../components/login/login.component';
 import {RegistrationComponent} from '../components/registration/registration.component';
 import {AuthService} from "../services/auth/auth.service";
 import {HttpClientModule} from "@angular/common/http";
+import {SlideshowModule} from "ng-simple-slideshow";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SlideshowModule
   ],
   providers: [
     AuthService
