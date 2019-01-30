@@ -1,7 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '2.0.6.RELEASE'
-        mysql_connector_version = '8.0.11'
+        mysql_connector_version = '8.0.13'
         liquibase_version = '3.6.2'
     }
     repositories {
