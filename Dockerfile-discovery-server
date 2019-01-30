@@ -6,8 +6,8 @@ RUN apt-get update
 RUN apt-get -y upgrade
 RUN apt-get -y install netcat
 
-COPY ../discovery/build/libs/discovery-1.0-SNAPSHOT.jar discovery-1.0-SNAPSHOT.jar
-COPY bootstrap.sh bootstrap.sh
+COPY discovery/build/libs/discovery-1.0-SNAPSHOT.jar discovery-1.0-SNAPSHOT.jar
+COPY docker/bootstrap.sh bootstrap.sh
 
 RUN chown 755 bootstrap.sh
 
