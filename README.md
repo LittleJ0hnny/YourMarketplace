@@ -7,6 +7,7 @@
 6.Think about ports (replication)
 7.jar names (create volumes)
 8.fix gateway start problem (add timeout or ping gateway endpoint)
+9.Configure line endings on git
 
 for dev dependencies npm install --save-dev @angular-devkit/build-angular
 

@@ -10,6 +10,4 @@ while ! nc -z localhost 8761; do
     sleep 3
 done
 
-sleep 20
-
-java -jar gateway-1.0-SNAPSHOT.jar
+java -jar img-service-1.0-SNAPSHOT.jar

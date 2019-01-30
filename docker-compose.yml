@@ -41,3 +41,18 @@ services:
     depends_on:
       - config-server
       - discovery-server
+
+  image-server:
+    container_name: image-server
+    build:
+      context: .
+      dockerfile: Dockerfile-image-server
+    image: image-server:latest
+    expose:
+      - 8400
+    ports:
+      - 8400:8400
+    network_mode: host
+    depends_on:
+      - config-server
+      - discovery-server
