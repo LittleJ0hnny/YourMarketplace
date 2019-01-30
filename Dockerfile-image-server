@@ -7,8 +7,8 @@ RUN apt-get -y upgrade
 RUN apt-get -y install netcat
 
 COPY img-service/build/libs/img-service-1.0-SNAPSHOT.jar img-service-1.0-SNAPSHOT.jar
-COPY docker/bootstrap3.sh bootstrap3.sh
+COPY docker/bootstrap-img-server.sh bootstrap-img-server.sh
 
-RUN chown 755 bootstrap3.sh
+RUN chown 755 bootstrap-img-server.sh
 
-CMD ["bash", "bootstrap3.sh"]
+CMD ["bash", "bootstrap-img-server.sh"]
