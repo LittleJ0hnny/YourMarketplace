@@ -1,28 +1,43 @@
 version: '3.7'
 
 services:
-    config-server:
-        container_name: config-server
-        build:
-            context: .
-            dockerfile: Dockerfile-config-server
-        image: config-server:latest
-        expose:
-            - 8888
-        ports:
-            - 8888:8888
-        network_mode: host
-    discovery-server:
-        container_name: discovery-server
-        build:
-            context: .
-            dockerfile: Dockerfile-discovery-server
-        image: discovery-server:latest
-        expose:
-            - 8761
-        ports:
-            - 8761:8761
-        network_mode: host
-        depends_on:
-            - config-server
-        
+  config-server:
+    container_name: config-server
+    build:
+      context: .
+      dockerfile: Dockerfile-config-server
+    image: config-server:latest
+    expose:
+      - 8888
+    ports:
+      - 8888:8888
+    network_mode: host
+
+  discovery-server:
+    container_name: discovery-server
+    build:
+      context: .
+      dockerfile: Dockerfile-discovery-server
+    image: discovery-server:latest
+    expose:
+      - 8761
+    ports:
+      - 8761:8761
+    network_mode: host
+    depends_on:
+      - config-server
+
+  gateway:
+    container_name: gateway-server
+    build:
+      context: .
+      dockerfile: Dockerfile-gateway-server
+    image: gateway-server:latest
+    expose:
+      - 8100
+    ports:
+      - 8100:8100
+    network_mode: host
+    depends_on:
+      - config-server
+      - discovery-server

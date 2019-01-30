@@ -1,0 +1,14 @@
+FROM openjdk:8u181-jdk
+
+EXPOSE 8100
+
+RUN apt-get update
+RUN apt-get -y upgrade
+RUN apt-get -y install netcat
+
+COPY gateway/build/libs/gateway-1.0-SNAPSHOT.jar gateway-1.0-SNAPSHOT.jar
+COPY docker/bootstrap2.sh bootstrap2.sh
+
+RUN chown 755 bootstrap2.sh
+
+CMD ["bash", "bootstrap2.sh"]
