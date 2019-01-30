@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    config:
+      name: image-service
+      discovery:
+        service-id: configservice
+        enabled: true
+      username: configUser
+      password: configPassword
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discUser:discPassword@localhost:8761/eureka/
