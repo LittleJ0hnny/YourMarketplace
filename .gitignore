@@ -25,6 +25,7 @@ hs_err_pid*
 #Intellij Idea
 /.idea
 .idea
+build
 out
 *.iml
 

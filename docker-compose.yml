@@ -1,6 +1,22 @@
 version: '3.7'
 
 services:
+  my-sql:
+    container_name: mysql-server
+    build:
+      context: .
+      dockerfile: Dockerfile-mysql-server
+    image: mysql-server:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+    network_mode: host
+
   config-server:
     container_name: config-server
     build:
@@ -56,3 +72,19 @@ services:
     depends_on:
       - config-server
       - discovery-server
+
+  auth-server:
+    container_name: auth-server
+    build:
+      context: .
+      dockerfile: Dockerfile-auth-server
+    image: auth-server:latest
+    expose:
+      - 8200
+    ports:
+      - 8200:8200
+    network_mode: host
+    depends_on:
+      - config-server
+      - discovery-server
+      - my-sql
